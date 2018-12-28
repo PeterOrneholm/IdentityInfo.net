@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -6,10 +6,24 @@
     <UserSecretsId>ff6c177f-2e2d-4a75-bdc7-4469b33e0ee4</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Testdata\SwedishPersonalIdentityNumbers_Testdata_181217.csv" />
+  </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Testdata\SwedishPersonalIdentityNumbers_Testdata_181217.csv" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="ActiveLogin.Identity.Swedish" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityInfo.Core\IdentityInfo.Core.csproj" />
   </ItemGroup>
 
 </Project>

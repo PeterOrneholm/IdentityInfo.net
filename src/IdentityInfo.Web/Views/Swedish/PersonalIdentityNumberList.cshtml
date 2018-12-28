@@ -1,0 +1,54 @@
+﻿@using ActiveLogin.Identity.Swedish
+@model IdentityInfo.Web.Models.SwedishPersonalIdentityNumberListViewModel
+
+@{
+    ViewBag.Title = "Numbers";
+
+    string GetAgeHint(SwedishPersonalIdentityNumber number)
+    {
+        try
+        {
+            return number.GetAgeHint().ToString();
+        }
+        catch
+        {
+            return "-";
+        }
+    }
+}
+
+<h2>Numbers</h2>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>12 Digit</th>
+            <th>10 Digit</th>
+            <th>Year</th>
+            <th>Month</th>
+            <th>Day</th>
+            <th>BirthNumber</th>
+            <th>Checksum</th>
+            <th>Gender Hint</th>
+            <th>Date of Birth Hint</th>
+            <th>Age Hint</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var number in Model.Numbers)
+        {
+            <tr>
+                <td>@number.To12DigitString()</td>
+                <td>@number.To10DigitString()</td>
+                <td>@number.Year</td>
+                <td>@number.Month</td>
+                <td>@number.Day</td>
+                <td>@number.BirthNumber</td>
+                <td>@number.Checksum</td>
+                <td>@number.GetGenderHint()</td>
+                <td>@number.GetDateOfBirthHint()</td>
+                <td>@GetAgeHint(number)</td>
+            </tr>
+        }
+    </tbody>
+</table>

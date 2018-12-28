@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,11 @@ namespace IdentityInfo.Core.Testdata
     {
         public static async Task<IEnumerable<SwedishPersonalIdentityNumber>> ParseCsvAsync(Stream stream)
         {
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
             var pins = new List<SwedishPersonalIdentityNumber>(250000);
             using (var reader = new StreamReader(stream))
             {
