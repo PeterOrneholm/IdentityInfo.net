@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Testdata\Data\SwedishPersonalIdentityNumbers_Testdata_181217.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Testdata\Data\SwedishPersonalIdentityNumbers_Testdata_181217.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ActiveLogin.Identity.Swedish" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
