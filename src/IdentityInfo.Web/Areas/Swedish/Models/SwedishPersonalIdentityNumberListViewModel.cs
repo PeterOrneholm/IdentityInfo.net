@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using ActiveLogin.Identity.Swedish;
 
-namespace IdentityInfo.Web.Models
+namespace IdentityInfo.Web.Areas.Swedish.Models
 {
     public class SwedishPersonalIdentityNumberListViewModel
     {

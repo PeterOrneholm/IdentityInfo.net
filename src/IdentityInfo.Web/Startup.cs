@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using IdentityInfo.Core.Testdata;
+﻿using IdentityInfo.Web.Areas.Swedish;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +20,7 @@ namespace IdentityInfo.Web
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSingleton<ISwedishPersonalIdentityNumbersTestdataProvider>(provider =>
-            {
-                var assembly = typeof(Startup).GetTypeInfo().Assembly;
-                var csvStream = assembly.GetManifestResourceStream("IdentityInfo.Web.Testdata.SwedishPersonalIdentityNumbers_Testdata_181217.csv");
-                return new SwedishPersonalIdentityNumbersCsvTestdataProvider(csvStream);
-            });
+            services.AddSwedishAreaServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +44,11 @@ namespace IdentityInfo.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{area:exists=Swedish}/{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
             });
         }
     }

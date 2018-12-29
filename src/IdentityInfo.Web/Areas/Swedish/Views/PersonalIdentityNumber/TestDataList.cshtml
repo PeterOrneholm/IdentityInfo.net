@@ -1,8 +1,8 @@
 ﻿@using ActiveLogin.Identity.Swedish
-@model IdentityInfo.Web.Models.SwedishPersonalIdentityNumberListViewModel
+@model SwedishPersonalIdentityNumberListViewModel
 
 @{
-    ViewBag.Title = "Numbers";
+    ViewBag.Title = "Swedish Personal Identity Numbers - Testdata";
 
     string GetAgeHint(SwedishPersonalIdentityNumber number)
     {
@@ -17,10 +17,10 @@
     }
 }
 
-<h2>Numbers</h2>
+<h2>@ViewBag.Title</h2>
 
 <table class="table table-striped table-hover">
-    <thead class="thead-dark">
+    <thead class="thead-dark thead-sticky">
         <tr>
             <th>12 Digit</th>
             <th>10 Digit</th>
@@ -31,7 +31,7 @@
             <th>Checksum</th>
             <th>Gender Hint</th>
             <th>Date of Birth Hint</th>
-            <th>Age Hint</th>
+            @*<th>Age Hint</th>*@
         </tr>
     </thead>
     <tbody>
@@ -46,8 +46,8 @@
                 <td>@number.BirthNumber</td>
                 <td>@number.Checksum</td>
                 <td>@number.GetGenderHint()</td>
-                <td>@number.GetDateOfBirthHint()</td>
-                <td>@GetAgeHint(number)</td>
+                <td>@number.GetDateOfBirthHint().ToShortDateString()</td>
+                @*<td>@GetAgeHint(number)</td>*@
             </tr>
         }
     </tbody>

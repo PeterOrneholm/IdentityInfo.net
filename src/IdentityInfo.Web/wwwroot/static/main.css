@@ -1,2 +1,53 @@
 ﻿body {
 }
+
+thead.thead-sticky tr th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.ii-sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 100vh;
+    background-color: #2F4F4F;
+}
+
+    .ii-sidebar .li-sidebar-brand {
+        display: block;
+        width: 100%;
+        font-size: 1.3em;
+        padding: 16px;
+        color: #f8f9fa;
+    }
+
+    .ii-sidebar .nav .nav-item .nav-link {
+        color: #f8f9fa;
+    }
+
+    .ii-sidebar .nav .nav-item a.nav-link:hover {
+        background-color: #1b2e2e;
+    }
+
+    .ii-sidebar .nav .nav-item .nav-link.nav-link-header {
+        font-weight: bold;
+        margin-top: 15px;
+    }
+
+    .ii-sidebar .ii-sidebar-footer {
+        color: #d9d9d9;
+        text-align: center;
+        padding: 16px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .table .thead-dark th {
+        background-color: #2F4F4F;
+    }
