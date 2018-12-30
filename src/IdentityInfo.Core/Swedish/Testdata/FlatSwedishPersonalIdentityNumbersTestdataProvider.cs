@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IdentityInfo.Core.Testdata
+namespace IdentityInfo.Core.Swedish.Testdata
 {
     public class FlatSwedishPersonalIdentityNumbersTestdataProvider : IFlatSwedishPersonalIdentityNumbersTestdataProvider
     {

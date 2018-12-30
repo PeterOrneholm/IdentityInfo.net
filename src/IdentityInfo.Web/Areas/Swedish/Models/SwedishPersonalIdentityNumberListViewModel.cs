@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using IdentityInfo.Core.Testdata;
+using IdentityInfo.Core.Swedish.Testdata;
 
 namespace IdentityInfo.Web.Areas.Swedish.Models
 {

@@ -1,5 +1,4 @@
-﻿@using ActiveLogin.Identity.Swedish
-@model SwedishPersonalIdentityNumberListViewModel
+﻿@model GetTestdataList.Result;
 
 @{
     ViewBag.Title = "Testdata - Swedish Personal Identity Numbers";
@@ -31,7 +30,7 @@
     </tr>
     </thead>
     <tbody>
-        @foreach (var number in Model.FlatNumbers)
+        @foreach (var number in Model.SwedishPersonalIdentityNumbers)
         {
             <tr>
                 <th scope="row">@number.TenDigitString</th>

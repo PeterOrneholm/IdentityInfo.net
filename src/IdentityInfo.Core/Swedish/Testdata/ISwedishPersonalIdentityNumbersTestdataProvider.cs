@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using ActiveLogin.Identity.Swedish;
 
-namespace IdentityInfo.Core.Testdata
+namespace IdentityInfo.Core.Swedish.Testdata
 {
     public interface ISwedishPersonalIdentityNumbersTestdataProvider
     {

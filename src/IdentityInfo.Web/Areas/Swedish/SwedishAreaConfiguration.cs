@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
-using IdentityInfo.Core.Testdata;
+using IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers;
+using IdentityInfo.Core.Swedish.Testdata;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MediatR;
 
 namespace IdentityInfo.Web.Areas.Swedish
 {
@@ -19,6 +21,8 @@ namespace IdentityInfo.Web.Areas.Swedish
             });
 
             services.AddSingleton<IFlatSwedishPersonalIdentityNumbersTestdataProvider, FlatSwedishPersonalIdentityNumbersTestdataProvider>();
+
+            services.AddMediatR(typeof(GetTestdataList));
         }
     }
 }

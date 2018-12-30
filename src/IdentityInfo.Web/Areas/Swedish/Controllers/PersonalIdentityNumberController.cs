@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using IdentityInfo.Core.Testdata;
+using IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers;
+using IdentityInfo.Core.Swedish.Testdata;
 using IdentityInfo.Web.Areas.Swedish.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityInfo.Web.Areas.Swedish.Controllers
@@ -10,11 +12,11 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
     [Route("personalidentitynumber")]
     public class PersonalIdentityNumberController : Controller
     {
-        private readonly IFlatSwedishPersonalIdentityNumbersTestdataProvider _flatSwedishPersonalIdentityNumbersTestdataProvider;
+        private readonly IMediator _meditator;
 
-        public PersonalIdentityNumberController(IFlatSwedishPersonalIdentityNumbersTestdataProvider flatSwedishPersonalIdentityNumbersTestdataProvider)
+        public PersonalIdentityNumberController(IMediator meditator)
         {
-            _flatSwedishPersonalIdentityNumbersTestdataProvider = flatSwedishPersonalIdentityNumbersTestdataProvider;
+            _meditator = meditator;
         }
 
         [HttpGet("")]
@@ -36,11 +38,10 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
         }
 
         [HttpGet("testdata")]
-        public async Task<IActionResult> TestDataList()
+        public async Task<IActionResult> TestDataList([FromQuery] GetTestdataList.Query query)
         {
-            var numbers = await _flatSwedishPersonalIdentityNumbersTestdataProvider.GetFlatSwedishPersonalIdentityNumbersAsync();
-            var viewModel = new SwedishPersonalIdentityNumberListViewModel(numbers.Take(1000));
-            return View(viewModel);
+            var result = await _meditator.Send(query);
+            return View(result);
         }
     }
 }

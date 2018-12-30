@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using ActiveLogin.Identity.Swedish;
-using IdentityInfo.Core.Testdata;
+using IdentityInfo.Core.Swedish.Testdata;
 using Xunit;
 
 namespace IdentityInfo.Web.Test.Testdata

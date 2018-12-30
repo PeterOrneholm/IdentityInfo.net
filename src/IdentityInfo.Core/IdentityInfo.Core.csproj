@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="ActiveLogin.Identity.Swedish" Version="1.0.0" />
+    <PackageReference Include="MediatR" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

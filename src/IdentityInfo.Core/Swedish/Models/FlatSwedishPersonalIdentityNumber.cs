@@ -1,7 +1,7 @@
 ﻿using System;
 using ActiveLogin.Identity.Swedish;
 
-namespace IdentityInfo.Core.Testdata
+namespace IdentityInfo.Core.Swedish.Testdata
 {
     public struct FlatSwedishPersonalIdentityNumber
     {

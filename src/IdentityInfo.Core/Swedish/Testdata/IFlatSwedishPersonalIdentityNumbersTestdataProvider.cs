@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
-namespace IdentityInfo.Core.Testdata
+namespace IdentityInfo.Core.Swedish.Testdata
 {
     public interface IFlatSwedishPersonalIdentityNumbersTestdataProvider
     {
