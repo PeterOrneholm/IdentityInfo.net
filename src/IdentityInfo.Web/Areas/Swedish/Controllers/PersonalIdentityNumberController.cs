@@ -10,18 +10,18 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
     [Route("personalidentitynumber")]
     public class PersonalIdentityNumberController : Controller
     {
-        private readonly ISwedishPersonalIdentityNumbersTestdataProvider _swedishPersonalIdentityNumbersTestdataProvider;
+        private readonly IFlatSwedishPersonalIdentityNumbersTestdataProvider _flatSwedishPersonalIdentityNumbersTestdataProvider;
 
-        public PersonalIdentityNumberController(ISwedishPersonalIdentityNumbersTestdataProvider swedishPersonalIdentityNumbersTestdataProvider)
+        public PersonalIdentityNumberController(IFlatSwedishPersonalIdentityNumbersTestdataProvider flatSwedishPersonalIdentityNumbersTestdataProvider)
         {
-            _swedishPersonalIdentityNumbersTestdataProvider = swedishPersonalIdentityNumbersTestdataProvider;
+            _flatSwedishPersonalIdentityNumbersTestdataProvider = flatSwedishPersonalIdentityNumbersTestdataProvider;
         }
 
         [HttpGet("testdata/list")]
         public async Task<IActionResult> TestDataList()
         {
-            var numbers = await _swedishPersonalIdentityNumbersTestdataProvider.GetSwedishPersonalIdentityNumbersAsync();
-            var viewModel = new SwedishPersonalIdentityNumberListViewModel(numbers.Take(100));
+            var numbers = await _flatSwedishPersonalIdentityNumbersTestdataProvider.GetFlatSwedishPersonalIdentityNumbersAsync();
+            var viewModel = new SwedishPersonalIdentityNumberListViewModel(numbers.Take(1000));
             return View(viewModel);
         }
     }

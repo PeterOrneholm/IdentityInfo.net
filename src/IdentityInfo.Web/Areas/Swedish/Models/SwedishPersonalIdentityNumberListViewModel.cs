@@ -1,15 +1,15 @@
 using System.Collections.Generic;
-using ActiveLogin.Identity.Swedish;
+using IdentityInfo.Core.Testdata;
 
 namespace IdentityInfo.Web.Areas.Swedish.Models
 {
     public class SwedishPersonalIdentityNumberListViewModel
     {
-        public SwedishPersonalIdentityNumberListViewModel(IEnumerable<SwedishPersonalIdentityNumber> numbers)
+        public SwedishPersonalIdentityNumberListViewModel(IEnumerable<FlatSwedishPersonalIdentityNumber> flatNumbers)
         {
-            Numbers = numbers;
+            FlatNumbers = flatNumbers;
         }
 
-        public IEnumerable<SwedishPersonalIdentityNumber> Numbers { get; }
+        public IEnumerable<FlatSwedishPersonalIdentityNumber> FlatNumbers { get; }
     }
 }

@@ -15,6 +15,8 @@ namespace IdentityInfo.Web.Areas.Swedish
                 var csvStream = assembly.GetManifestResourceStream("IdentityInfo.Web.Testdata.SwedishPersonalIdentityNumbers_Testdata_181217.csv");
                 return new SwedishPersonalIdentityNumbersCsvTestdataProvider(csvStream);
             });
+
+            services.AddSingleton<IFlatSwedishPersonalIdentityNumbersTestdataProvider, FlatSwedishPersonalIdentityNumbersTestdataProvider>();
         }
     }
 }
