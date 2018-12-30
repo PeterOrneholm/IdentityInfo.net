@@ -1,4 +1,5 @@
-﻿@model GetTestdataList.Result;
+﻿@using ActiveLogin.Identity.Swedish
+@model GetTestdataList.Result;
 
 @{
     ViewBag.Title = "Testdata - Swedish Personal Identity Numbers";
@@ -24,9 +25,9 @@
         <th scope="col" class="d-none d-lg-table-cell">Delimiter</th>
         <th scope="col" class="d-none d-lg-table-cell">BirthNumber</th>
         <th scope="col" class="d-none d-lg-table-cell">Checksum</th>
-        <th scope="col">Gender Hint</th>
-        <th scope="col">Date of Birth Hint</th>
-        <th scope="col">Age Hint</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Age</th>
     </tr>
     </thead>
     <tbody>
@@ -41,7 +42,10 @@
                 <td class="d-none d-lg-table-cell">@number.Delimiter</td>
                 <td class="d-none d-lg-table-cell">@number.BirthNumber</td>
                 <td class="d-none d-lg-table-cell">@number.Checksum</td>
-                <td>@number.GenderHint</td>
+                <td>
+                    <i class="fal fa-@(number.GenderHint == Gender.Female ? "venus" : "mars")" title="@number.GenderHint"></i>
+                    @number.GenderHint
+                </td>
                 <td>@number.DateOfBirthHint.ToShortDateString()</td>
                 <td>@(number.AgeHint?.ToString("D") ?? "N/A")</td>
             </tr>
