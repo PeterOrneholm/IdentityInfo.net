@@ -2,7 +2,7 @@
 
 namespace IdentityInfo.Web.Areas.Swedish.Controllers
 {
-    [Area(AreaNames.Swedish)]
+    [Area(SwedishAreaConfiguration.AreaName)]
     public class HomeController : Controller
     {
         public IActionResult Index()

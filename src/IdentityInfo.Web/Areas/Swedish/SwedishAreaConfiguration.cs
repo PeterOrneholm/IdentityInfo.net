@@ -7,6 +7,8 @@ namespace IdentityInfo.Web.Areas.Swedish
 {
     public static class SwedishAreaConfiguration
     {
+        public const string AreaName = "Swedish";
+
         public static void AddSwedishAreaServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<ISwedishPersonalIdentityNumbersTestdataProvider>(provider =>
