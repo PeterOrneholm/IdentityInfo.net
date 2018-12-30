@@ -17,7 +17,25 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
             _flatSwedishPersonalIdentityNumbersTestdataProvider = flatSwedishPersonalIdentityNumbersTestdataProvider;
         }
 
-        [HttpGet("testdata/list")]
+        [HttpGet("")]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
+        [HttpGet("validate")]
+        public async Task<IActionResult> Validate()
+        {
+            return View();
+        }
+
+        [HttpGet("generate")]
+        public async Task<IActionResult> Generate()
+        {
+            return View();
+        }
+
+        [HttpGet("testdata")]
         public async Task<IActionResult> TestDataList()
         {
             var numbers = await _flatSwedishPersonalIdentityNumbersTestdataProvider.GetFlatSwedishPersonalIdentityNumbersAsync();
