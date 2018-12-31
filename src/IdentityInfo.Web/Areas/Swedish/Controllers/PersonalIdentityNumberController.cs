@@ -41,7 +41,8 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
         public async Task<IActionResult> TestDataList([FromQuery] GetTestdataList.Query query)
         {
             var result = await _meditator.Send(query);
-            return View(result);
+            var viewModel = new SwedishPersonalIdentityNumberTestdataListViewModel(query, result);
+            return View(viewModel);
         }
     }
 }

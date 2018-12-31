@@ -51,3 +51,8 @@ thead.thead-sticky tr th {
     .table .thead-dark th {
         background-color: #2F4F4F;
     }
+
+
+.ii-filter-submit-group {
+    padding-top: 32px;
+}
