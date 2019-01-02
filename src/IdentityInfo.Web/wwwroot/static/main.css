@@ -67,11 +67,15 @@ thead.thead-sticky tr th {
     border-top: none;
 }
 
-.ii-spin-info-table tr :first-child {
+.ii-spin-info-table tr > :first-child {
     white-space: nowrap;
     text-align: right;
 }
 
-.ii-spin-info-table tr :last-child {
+.ii-spin-info-table tr > :nth-child(2) {
+    white-space: nowrap;
+}
+
+.ii-spin-info-table tr > :last-child {
     width: 100%;
 }

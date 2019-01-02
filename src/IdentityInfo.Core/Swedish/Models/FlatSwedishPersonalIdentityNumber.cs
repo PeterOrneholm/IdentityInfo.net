@@ -7,7 +7,7 @@ namespace IdentityInfo.Core.Swedish.Testdata
     {
         private static int? TryGetAgeHint(SwedishPersonalIdentityNumber pin, DateTime dateOfBirthHint)
         {
-            if (dateOfBirthHint > DateTime.Now)
+            if (dateOfBirthHint > DateTime.UtcNow.Date)
             {
                 return null;
             }

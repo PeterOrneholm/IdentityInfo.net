@@ -16,7 +16,7 @@
 <section class="card bg-white text-center mb-3">
     <div class="card-body py-5">
         <div style="max-width: 400px; margin: 0 auto;">
-            <form asp-action="Validate" method="post">
+            <form asp-action="Validate" method="get">
                 <div class="form-group">
                     <label asp-for="NumberInput">Swedish Personal Identity Number</label>
                     <input type="tel" class="form-control form-control-lg text-center" name="number" asp-for="NumberInput" required maxlength="50" placeholder="YYMMDD-XXXX" />
@@ -48,57 +48,76 @@
                         <tr>
                             <th>10 Digit String</th>
                             <td>@number.TenDigitString</td>
-                            <td>Explanation</td>
+                            <td>
+                                <a href="#" onclick="identityinfonet.copyToClipboard('@number.TenDigitString');return false;" title="Copy '@number.TenDigitString' to clipboard"><i class="fal fa-clipboard"></i></a>
+                            </td>
+                            <td>This is the most common format, often refered to as YYMMDD-XXXX. The year is represented as 2 digits and the delimiter provides the info required to get the full year.</td>
                         </tr>
                         <tr>
                             <th>12 Digit String</th>
                             <td>@number.TwelveDigitString</td>
-                            <td>Explanation</td>
+                            <td>
+                                <a href="#" onclick="identityinfonet.copyToClipboard('@number.TwelveDigitString');return false;" title="Copy '@number.TwelveDigitString' to clipboard"><i class="fal fa-clipboard"></i></a>
+                            </td>
+                            <td>The format that is the receomended one to use when persisting it as it contains the full year as digits and no delmiter that changes over time..</td>
                         </tr>
                         <tr>
                             <th>Year</th>
                             <td>@number.Year.ToString("0000")</td>
-                            <td>Explanation</td>
+                            <td></td>
+                            <td>The year the person was born.</td>
                         </tr>
                         <tr>
                             <th>Month</th>
                             <td>@number.Month.ToString("00")</td>
-                            <td>Explanation</td>
+                            <td></td>
+                            <td>The month the person was born.</td>
                         </tr>
                         <tr>
                             <th>Day</th>
                             <td>@number.Day.ToString("00")</td>
-                            <td>Explanation</td>
+                            <td></td>
+                            <td>
+                                The day the person was born.<br />
+                                <em>Note:</em> Because of a limited amount of birth numbers per day (1000) a person might not receive the exact day as the day part.
+                                It can be a few days later or earlier, but always within the same month.
+                            </td>
                         </tr>
                         <tr>
                             <th>Delimiter</th>
                             <td>@number.Delimiter</td>
-                            <td>Explanation</td>
+                            <td></td>
+                            <td>By default a hyphen (-) but turns into a plus (+) the year the person turns 100.</td>
                         </tr>
                         <tr>
                             <th>Birth Number</th>
                             <td>@number.BirthNumber.ToString("000")</td>
-                            <td>Explanation</td>
+                            <td></td>
+                            <td>A number to uniqely identity a person born on the day. 1000 in total, 500 female (even numbers) and 500 male (odd numbers).</td>
                         </tr>
                         <tr>
                             <th>Checksum</th>
                             <td>@number.Checksum</td>
-                            <td>Explanation</td>
+                            <td></td>
+                            <td>Calculated using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> on the 10 digit string (without delimiter).</td>
                         </tr>
                         <tr>
                             <th>Gender</th>
                             <td>@number.GenderHint</td>
-                            <td>Explanation</td>
+                            <td></td>
+                            <td>Extracted from Birth Number.</td>
                         </tr>
                         <tr>
                             <th>Date of Birth</th>
                             <td>@number.DateOfBirthHint.ToShortDateString()</td>
-                            <td>Explanation</td>
+                            <td></td>
+                            <td>Extracted from Year, Month and Day. See potential limitation on Day.</td>
                         </tr>
                         <tr>
                             <th>Age</th>
-                            <td>@(number.AgeHint.HasValue ? number.AgeHint.Value.ToString("D") : "N/A")</td>
-                            <td>Explanation</td>
+                            <td>@(number.AgeHint.HasValue ? number.AgeHint.Value.ToString("D") : "Not yet born")</td>
+                            <td></td>
+                            <td>Extracted from Date of Birth. See potential limitation on Day.</td>
                         </tr>
                     </table>
                 </div>
