@@ -14,8 +14,8 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
     {
         public class Query : IRequest<Result>
         {
-            public int? Skip { get; set; }
-            public int? Take { get; set; } = 100;
+            public int? Offset { get; set; }
+            public int? Limit { get; set; } = 100;
 
             public Range<int> Year { get; set; }
             public Range<int> Month { get; set; }
@@ -32,7 +32,7 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
 
             public string ToQueryString()
             {
-                return ToQueryString(this.Skip);
+                return ToQueryString(this.Offset);
             }
 
             public string ToQueryString(int? skip)
@@ -56,9 +56,9 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
                     queryStringParams.Add(nameof(skip).ToLower(), skip.Value.ToString("D"));
                 }
 
-                if (Take.HasValue)
+                if (Limit.HasValue)
                 {
-                    queryStringParams.Add(nameof(Take).ToLower(), Take.Value.ToString("D"));
+                    queryStringParams.Add(nameof(Limit).ToLower(), Limit.Value.ToString("D"));
                 }
 
                 return GetQueryString(queryStringParams);
@@ -162,14 +162,14 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
 
             private IEnumerable<FlatSwedishPersonalIdentityNumber> Paginate(Query request, IEnumerable<FlatSwedishPersonalIdentityNumber> filteredTestdata)
             {
-                if (request.Skip.HasValue)
+                if (request.Offset.HasValue)
                 {
-                    filteredTestdata = filteredTestdata.Skip(request.Skip.Value);
+                    filteredTestdata = filteredTestdata.Skip(request.Offset.Value);
                 }
 
-                if (request.Take.HasValue)
+                if (request.Limit.HasValue)
                 {
-                    filteredTestdata = filteredTestdata.Take(request.Take.Value);
+                    filteredTestdata = filteredTestdata.Take(request.Limit.Value);
                 }
 
                 return filteredTestdata;

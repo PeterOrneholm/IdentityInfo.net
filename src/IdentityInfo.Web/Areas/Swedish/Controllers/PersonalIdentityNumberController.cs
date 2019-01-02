@@ -40,7 +40,7 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
         [HttpGet("testdata")]
         public async Task<IActionResult> TestDataList([FromQuery] GetTestdataList.Query query)
         {
-            if (query.Take > 1000)
+            if (query.Limit > 1000)
             {
                 return new BadRequestResult();
             }

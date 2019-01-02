@@ -49,16 +49,16 @@
 
 @if (Model.Result.SwedishPersonalIdentityNumbersCount > 0)
 {
-    if (Model.Query.Take.HasValue)
+    if (Model.Query.Limit.HasValue)
     {
         <nav class="d-flex justify-content-between mb-3">
             <ul class="pagination mb-0">
                 @{
-                    var take = Model.Query.Take ?? 100;
-                    var totalPages = (Model.Result.SwedishPersonalIdentityNumbersCount + take - 1) / take;
+                    var limit = Model.Query.Limit ?? 100;
+                    var totalPages = (Model.Result.SwedishPersonalIdentityNumbersCount + limit - 1) / limit;
 
-                    var currentSkip = Model.Query.Skip ?? 0;
-                    var currentPageNumber = (currentSkip / take) + 1;
+                    var currentOffset = Model.Query.Offset ?? 0;
+                    var currentPageNumber = (currentOffset / limit) + 1;
 
                     var rangeItems = 4;
                     var rangeFromPageNumber = Math.Max(currentPageNumber - rangeItems, 1);
@@ -74,7 +74,7 @@
                 @if (enablePrev)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Model.Query.ToQueryString(currentSkip - take)">&laquo;</a>
+                        <a class="page-link" href="@Model.Query.ToQueryString(currentOffset - limit)">&laquo;</a>
                     </li>
                 }
                 else
@@ -94,7 +94,7 @@
 
                 @for (var i = rangeFromPageNumber - 1; i < rangeToPageNumber; i++)
                 {
-                    var skip = i * take;
+                    var offset = i * limit;
                     var pageNumber = i + 1;
 
                     if (pageNumber == currentPageNumber)
@@ -106,7 +106,7 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" href="@Model.Query.ToQueryString(skip)">@pageNumber</a>
+                            <a class="page-link" href="@Model.Query.ToQueryString(offset)">@pageNumber</a>
                         </li>
                     }
                 }
@@ -119,14 +119,14 @@
                         </span>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="@Model.Query.ToQueryString((totalPages - 1) * take)">@totalPages</a>
+                        <a class="page-link" href="@Model.Query.ToQueryString((totalPages - 1) * limit)">@totalPages</a>
                     </li>
                 }
 
                 @if (enableNext)
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Model.Query.ToQueryString(currentSkip + take)">&raquo;</a>
+                        <a class="page-link" href="@Model.Query.ToQueryString(currentOffset + limit)">&raquo;</a>
                     </li>
                 }
                 else
