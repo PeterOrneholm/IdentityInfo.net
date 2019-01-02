@@ -25,14 +25,14 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
             return View();
         }
 
-        //[HttpGet("validate")]
-        //public async Task<IActionResult> Validate()
-        //{
-        //    return View(Core.Swedish.Requests.PersonalIdentityNumbers.Validate.Result.Invalid(string.Empty));
-        //}
-
         [HttpGet("validate")]
-        public async Task<IActionResult> Validate([FromQuery] Validate.Query query)
+        public async Task<IActionResult> Validate()
+        {
+            return View(Core.Swedish.Requests.PersonalIdentityNumbers.Validate.Result.Invalid(string.Empty));
+        }
+
+        [HttpPost("validate")]
+        public async Task<IActionResult> Validate([FromForm] Validate.Query query)
         {
             if (query.Number != null && query.Number.Length > 50)
             {

@@ -15,14 +15,14 @@
 
 <section class="card bg-white text-center mb-3">
     <div class="card-body py-5">
-        <div style="max-width: 500px; margin: 0 auto;">
-            <form asp-action="Validate" method="get">
+        <div style="max-width: 400px; margin: 0 auto;">
+            <form asp-action="Validate" method="post">
                 <div class="form-group">
                     <label asp-for="NumberInput">Swedish Personal Identity Number</label>
-                    <input type="tel" class="form-control text-center" name="number" asp-for="NumberInput" required maxlength="50" placeholder="YYMMDD-XXXX" />
+                    <input type="tel" class="form-control form-control-lg text-center" name="number" asp-for="NumberInput" required maxlength="50" placeholder="YYMMDD-XXXX" />
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Validate</button>
+                    <button type="submit" class="btn btn-primary btn-block">Parse &amp; Validate</button>
                 </div>
             </form>
         </div>
@@ -42,49 +42,73 @@
             var number = Model.Number.Value;
 
             <section class="card bg-white mt-3">
-                <div class="card-body">
-                    <dl>
-                        <dt>12 Digit String</dt>
-                        <dd>@number.TwelveDigitString</dd>
-
-                        <dt>10 Digit String</dt>
-                        <dd>@number.TenDigitString</dd>
-                        
-                        <dt>Year</dt>
-                        <dd>@number.Year</dd>
-                        
-                        <dt>Month</dt>
-                        <dd>@number.Month</dd>
-                        
-                        <dt>Day</dt>
-                        <dd>@number.Day</dd>
-                        
-                        <dt>Delimiter</dt>
-                        <dd>@number.Delimiter</dd>
-                        
-                        <dt>Birth number</dt>
-                        <dd>@number.BirthNumber</dd>
-                        
-                        <dt>Checksum</dt>
-                        <dd>@number.Checksum</dd>
-                        
-                        <dt>Gender</dt>
-                        <dd>@number.GenderHint</dd>
-                        
-                        <dt>Date of Birth</dt>
-                        <dd>@number.DateOfBirthHint</dd>
-                        
-                        <dt>Age</dt>
-                        <dd>@number.AgeHint</dd>
-                    </dl>
+                <h4 class="card-header text-center"><i class="fal fa-id-badge"></i> @number.TenDigitString</h4>
+                <div class="card-body px-0 py-0">
+                    <table class="table table-hover table-striped ii-spin-info-table my-0">
+                        <tr>
+                            <th>10 Digit String</th>
+                            <td>@number.TenDigitString</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>12 Digit String</th>
+                            <td>@number.TwelveDigitString</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>Year</th>
+                            <td>@number.Year.ToString("0000")</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>Month</th>
+                            <td>@number.Month.ToString("00")</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>Day</th>
+                            <td>@number.Day.ToString("00")</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>Delimiter</th>
+                            <td>@number.Delimiter</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>Birth Number</th>
+                            <td>@number.BirthNumber.ToString("000")</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>Checksum</th>
+                            <td>@number.Checksum</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td>@number.GenderHint</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>Date of Birth</th>
+                            <td>@number.DateOfBirthHint.ToShortDateString()</td>
+                            <td>Explanation</td>
+                        </tr>
+                        <tr>
+                            <th>Age</th>
+                            <td>@(number.AgeHint.HasValue ? number.AgeHint.Value.ToString("D") : "N/A")</td>
+                            <td>Explanation</td>
+                        </tr>
+                    </table>
                 </div>
             </section>
         }
     }
     else
     {
-            <div class="alert alert-danger text-center" role="alert">
-                <i class="fal fa-exclamation-triangle"></i> <strong>@Model.NumberInput</strong> is not recognized as a valid Swedish Personal Identity Number!
-            </div>
+        <div class="alert alert-danger text-center" role="alert">
+            <i class="fal fa-exclamation-triangle"></i> <strong>@Model.NumberInput</strong> is not recognized as a valid Swedish Personal Identity Number!
+        </div>
     }
 }
