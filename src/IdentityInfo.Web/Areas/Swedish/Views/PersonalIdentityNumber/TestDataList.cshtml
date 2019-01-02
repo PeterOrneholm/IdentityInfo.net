@@ -47,7 +47,7 @@
 </form>
 
 
-@if (Model.Result.SwedishPersonalIdentityNumbersCount > 0)
+@if (Model.Result.FilteredNumbersCount > 0)
 {
     if (Model.Query.Limit.HasValue)
     {
@@ -55,7 +55,7 @@
             <ul class="pagination mb-0">
                 @{
                     var limit = Model.Query.Limit ?? 100;
-                    var totalPages = (Model.Result.SwedishPersonalIdentityNumbersCount + limit - 1) / limit;
+                    var totalPages = (Model.Result.FilteredNumbersCount + limit - 1) / limit;
 
                     var currentOffset = Model.Query.Offset ?? 0;
                     var currentPageNumber = (currentOffset / limit) + 1;
@@ -138,13 +138,13 @@
             </ul>
 
             <div class="py-1 d-none d-lg-block">
-                @if (Model.Result.SwedishPersonalIdentityNumbersCount == Model.Result.TotalRows)
+                @if (Model.Result.FilteredNumbersCount == Model.Result.TotalNumbers)
                 {
-                    <text>Showing all @Model.Result.TotalRows.ToString("N0") results.</text>
+                    <text>Showing all @Model.Result.TotalNumbers.ToString("N0") results.</text>
                 }
                 else
                 {
-                    <text>Showing @Model.Result.SwedishPersonalIdentityNumbersCount.ToString("N0") of @Model.Result.TotalRows.ToString("N0") results.</text>
+                    <text>Showing @Model.Result.FilteredNumbersCount.ToString("N0") of @Model.Result.TotalNumbers.ToString("N0") results.</text>
                 }
             </div>
         </nav>
@@ -169,7 +169,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var number in Model.Result.SwedishPersonalIdentityNumbers)
+                @foreach (var number in Model.Result.FilteredNumbers)
                 {
                     <tr>
                         <th scope="row">@number.TenDigitString</th>

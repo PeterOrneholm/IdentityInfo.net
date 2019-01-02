@@ -26,9 +26,10 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
         }
 
         [HttpGet("validate")]
-        public async Task<IActionResult> Validate()
+        public async Task<IActionResult> Validate([FromQuery] Validate.Query query)
         {
-            return View();
+            var result = await _meditator.Send(query);
+            return View(result);
         }
 
         [HttpGet("generate")]

@@ -35,7 +35,7 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
                 return ToQueryString(this.Offset);
             }
 
-            public string ToQueryString(int? skip)
+            public string ToQueryString(int? offset)
             {
                 var queryStringParams = new Dictionary<string, string>();
                 AddRangeQueryStringParams(queryStringParams, nameof(Year), Year, i => i.ToString("D"));
@@ -51,9 +51,9 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
                 AddRangeQueryStringParams(queryStringParams, nameof(Age), Age, i => i.ToString("D"));
 
 
-                if (skip.HasValue)
+                if (offset.HasValue)
                 {
-                    queryStringParams.Add(nameof(skip).ToLower(), skip.Value.ToString("D"));
+                    queryStringParams.Add(nameof(Offset).ToLower(), offset.Value.ToString("D"));
                 }
 
                 if (Limit.HasValue)
@@ -94,8 +94,7 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
             }
         }
 
-        public class Handler :
-            IRequestHandler<Query, Result>
+        public class Handler : IRequestHandler<Query, Result>
         {
             private readonly IFlatSwedishPersonalIdentityNumbersTestdataProvider _flatSwedishPersonalIdentityNumbersTestdataProvider;
 
@@ -178,16 +177,16 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
 
         public class Result
         {
-            public Result(IEnumerable<FlatSwedishPersonalIdentityNumber> swedishPersonalIdentityNumbers, int swedishPersonalIdentityNumbersCount, int totalRows)
+            public Result(IEnumerable<FlatSwedishPersonalIdentityNumber> filteredNumbers, int filteredNumbersCount, int totalNumbers)
             {
-                SwedishPersonalIdentityNumbers = swedishPersonalIdentityNumbers;
-                SwedishPersonalIdentityNumbersCount = swedishPersonalIdentityNumbersCount;
-                TotalRows = totalRows;
+                FilteredNumbers = filteredNumbers;
+                FilteredNumbersCount = filteredNumbersCount;
+                TotalNumbers = totalNumbers;
             }
 
-            public IEnumerable<FlatSwedishPersonalIdentityNumber> SwedishPersonalIdentityNumbers { get; }
-            public int SwedishPersonalIdentityNumbersCount { get; }
-            public int TotalRows { get; }
+            public IEnumerable<FlatSwedishPersonalIdentityNumber> FilteredNumbers { get; }
+            public int FilteredNumbersCount { get; }
+            public int TotalNumbers { get; }
         }
     }
 }
