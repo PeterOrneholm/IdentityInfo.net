@@ -13,7 +13,7 @@
 <body>
 <div class="container-fluid">
     <div class="row flex-xl-nowrap">
-        <aside class="col-12 col-md-3 col-xl-3 sticky-top ii-sidebar">
+        <aside class="col-12 col-md-3 col-xl-3 ii-sidebar">
             <a class="li-sidebar-brand" asp-area="Swedish" asp-controller="Home" asp-action="Index">@(ViewData["Subsite"]) Identity Info</a>
 
             @RenderSection("LeftMenu", required: false)
@@ -23,7 +23,7 @@
             </div>
         </aside>
 
-        <main class="col-12 col-md-9 col-xl-9 py-md-3 py-3 bg-light ii-main" role="main">
+        <main class="col-12 col-md-9 col-xl-9 py-md-3 px-4 py-3 bg-light ii-main" role="main">
             @RenderBody()
         </main>
     </div>

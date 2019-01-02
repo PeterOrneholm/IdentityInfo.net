@@ -36,8 +36,8 @@
             <label asp-for="Query.Gender">Gender</label>
             <select class="form-control" name="gender" asp-for="Query.Gender">
                 <option value="" selected>All</option>
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
             </select>
         </div>
         <div class="form-group col-md-6 col-lg-2 ii-filter-submit-group">
@@ -49,44 +49,148 @@
 
 @if (Model.Result.SwedishPersonalIdentityNumbersCount > 0)
 {
-    <table class="table table-striped table-hover">
-        <thead class="thead-dark thead-sticky">
-            <tr>
-                <th scope="col">10 Digit</th>
-                <th scope="col">12 Digit</th>
-                <th scope="col" class="d-none d-lg-table-cell">Year</th>
-                <th scope="col" class="d-none d-lg-table-cell">Month</th>
-                <th scope="col" class="d-none d-lg-table-cell">Day</th>
-                <th scope="col" class="d-none d-lg-table-cell">Delimiter</th>
-                <th scope="col" class="d-none d-lg-table-cell">BirthNumber</th>
-                <th scope="col" class="d-none d-lg-table-cell">Checksum</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Date of Birth</th>
-                <th scope="col">Age</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var number in Model.Result.SwedishPersonalIdentityNumbers)
-            {
+    if (Model.Query.Take.HasValue)
+    {
+        <nav class="d-flex justify-content-between mb-3">
+            <ul class="pagination mb-0">
+                @{
+                    var take = Model.Query.Take ?? 100;
+                    var totalPages = (Model.Result.SwedishPersonalIdentityNumbersCount + take - 1) / take;
+
+                    var currentSkip = Model.Query.Skip ?? 0;
+                    var currentPageNumber = (currentSkip / take) + 1;
+
+                    var rangeItems = 4;
+                    var rangeFromPageNumber = Math.Max(currentPageNumber - rangeItems, 1);
+                    var rangeToPageNumber = Math.Min(rangeFromPageNumber + rangeItems, totalPages);
+
+                    var enablePrev = currentPageNumber > 1;
+                    var enableNext = currentPageNumber < totalPages;
+
+                    var showFirstPage = rangeFromPageNumber > 1;
+                    var showLastPage = totalPages > rangeToPageNumber;
+                }
+
+                @if (enablePrev)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Model.Query.ToQueryString(currentSkip - take)">&laquo;</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;</span>
+                    </li>
+                }
+
+                @if (showFirstPage)
+                {
+                    <li class="page-item"><a class="page-link" href="@Model.Query.ToQueryString(0)">1</a></li>
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                }
+
+                @for (var i = rangeFromPageNumber - 1; i < rangeToPageNumber; i++)
+                {
+                    var skip = i * take;
+                    var pageNumber = i + 1;
+
+                    if (pageNumber == currentPageNumber)
+                    {
+                        <li class="page-item active">
+                            <span class="page-link">@pageNumber</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Model.Query.ToQueryString(skip)">@pageNumber</a>
+                        </li>
+                    }
+                }
+
+                @if (showLastPage)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link" href="" tabindex="-1">
+                            ...
+                        </span>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Model.Query.ToQueryString((totalPages - 1) * take)">@totalPages</a>
+                    </li>
+                }
+
+                @if (enableNext)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Model.Query.ToQueryString(currentSkip + take)">&raquo;</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;</span>
+                    </li>
+                }
+            </ul>
+
+            <div class="py-1 d-none d-lg-block">
+                @if (Model.Result.SwedishPersonalIdentityNumbersCount == Model.Result.TotalRows)
+                {
+                    <text>Showing all @Model.Result.TotalRows.ToString("N0") results.</text>
+                }
+                else
+                {
+                    <text>Showing @Model.Result.SwedishPersonalIdentityNumbersCount.ToString("N0") of @Model.Result.TotalRows.ToString("N0") results.</text>
+                }
+            </div>
+        </nav>
+    }
+
+    <div class="table-responsive-sm">
+
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark thead-sticky">
                 <tr>
-                    <th scope="row">@number.TenDigitString</th>
-                    <td>@number.TwelveDigitString</td>
-                    <td class="d-none d-lg-table-cell">@number.Year</td>
-                    <td class="d-none d-lg-table-cell">@number.Month</td>
-                    <td class="d-none d-lg-table-cell">@number.Day</td>
-                    <td class="d-none d-lg-table-cell">@number.Delimiter</td>
-                    <td class="d-none d-lg-table-cell">@number.BirthNumber</td>
-                    <td class="d-none d-lg-table-cell">@number.Checksum</td>
-                    <td>
-                        <i class="fal fa-@(number.GenderHint == Gender.Female ? "venus" : "mars")" title="@number.GenderHint"></i>
-                        @number.GenderHint
-                    </td>
-                    <td>@number.DateOfBirthHint.ToShortDateString()</td>
-                    <td>@(number.AgeHint?.ToString("D") ?? "N/A")</td>
+                    <th scope="col">10 Digit</th>
+                    <th scope="col">12 Digit</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Year</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Month</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Day</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Delimiter</th>
+                    <th scope="col" class="d-none d-lg-table-cell">BirthNumber</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Checksum</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Date of Birth</th>
+                    <th scope="col">Age</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var number in Model.Result.SwedishPersonalIdentityNumbers)
+                {
+                    <tr>
+                        <th scope="row">@number.TenDigitString</th>
+                        <td>@number.TwelveDigitString</td>
+                        <td class="d-none d-lg-table-cell">@number.Year</td>
+                        <td class="d-none d-lg-table-cell">@number.Month</td>
+                        <td class="d-none d-lg-table-cell">@number.Day</td>
+                        <td class="d-none d-lg-table-cell">@number.Delimiter</td>
+                        <td class="d-none d-lg-table-cell">@number.BirthNumber</td>
+                        <td class="d-none d-lg-table-cell">@number.Checksum</td>
+                        <td>
+                            <i class="fal fa-@(number.GenderHint == Gender.Female ? "venus" : "mars")" title="@number.GenderHint"></i>
+                            @number.GenderHint
+                        </td>
+                        <td>@number.DateOfBirthHint.ToShortDateString()</td>
+                        <td>@(number.AgeHint?.ToString("D") ?? "N/A")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {
