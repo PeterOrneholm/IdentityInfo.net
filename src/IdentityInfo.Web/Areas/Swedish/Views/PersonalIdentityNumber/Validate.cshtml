@@ -9,29 +9,82 @@
 </h1>
 
 <p class="lead py-3">
-    Pellentesque sollicitudin ex a orci hendrerit ullamcorper in in nulla. Nunc feugiat enim eget hendrerit faucibus. Nullam sed justo eros. Curabitur pellentesque ullamcorper ligula, non viverra sem blandit vel. Cras rhoncus, mi ac fringilla placerat.
+    A Swedish personal identity number can be written in a lot of different ways. It normally takes one of the standard forms (YYMMDD-XXXX, YYMMDD+XXXX or YYYYMMDDXXXX) but can also include variations with whitespaces etc. Use the form below to parse a value and find out data that be extracted form the number such as date of birth and gender.
 </p>
 
 
-<form asp-action="Validate" method="get">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label asp-for="NumberInput">Swedish Personal Identity Number</label>
-            <input type="tel" class="form-control" name="number" asp-for="NumberInput" required placeholder="YYMMDD-XXXX" />
-        </div>
-        <div class="form-group col-md-6 ii-filter-submit-group">
-            <button type="submit" class="btn btn-primary btn-block">Validate</button>
+<section class="card bg-white text-center mb-3">
+    <div class="card-body py-5">
+        <div style="max-width: 500px; margin: 0 auto;">
+            <form asp-action="Validate" method="get">
+                <div class="form-group">
+                    <label asp-for="NumberInput">Swedish Personal Identity Number</label>
+                    <input type="tel" class="form-control text-center" name="number" asp-for="NumberInput" required maxlength="50" placeholder="YYMMDD-XXXX" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Validate</button>
+                </div>
+            </form>
         </div>
     </div>
-</form>
+</section>
 
 @if (!string.IsNullOrEmpty(Model.NumberInput))
 {
-    <div>
-        IsValid: @Model.IsValid
-        @if (Model.IsValid && Model.Number.HasValue)
+    if (Model.IsValid)
+    {
+        <div class="alert alert-success text-center" role="alert">
+            <i class="fal fa-badge-check"></i> <strong>@Model.NumberInput</strong> is recognized as a valid Swedish Personal Identity Number!
+        </div>
+
+        if (Model.Number.HasValue)
         {
-            <span>Value: @Model.Number.Value.TwelveDigitString</span>
+            var number = Model.Number.Value;
+
+            <section class="card bg-white mt-3">
+                <div class="card-body">
+                    <dl>
+                        <dt>12 Digit String</dt>
+                        <dd>@number.TwelveDigitString</dd>
+
+                        <dt>10 Digit String</dt>
+                        <dd>@number.TenDigitString</dd>
+                        
+                        <dt>Year</dt>
+                        <dd>@number.Year</dd>
+                        
+                        <dt>Month</dt>
+                        <dd>@number.Month</dd>
+                        
+                        <dt>Day</dt>
+                        <dd>@number.Day</dd>
+                        
+                        <dt>Delimiter</dt>
+                        <dd>@number.Delimiter</dd>
+                        
+                        <dt>Birth number</dt>
+                        <dd>@number.BirthNumber</dd>
+                        
+                        <dt>Checksum</dt>
+                        <dd>@number.Checksum</dd>
+                        
+                        <dt>Gender</dt>
+                        <dd>@number.GenderHint</dd>
+                        
+                        <dt>Date of Birth</dt>
+                        <dd>@number.DateOfBirthHint</dd>
+                        
+                        <dt>Age</dt>
+                        <dd>@number.AgeHint</dd>
+                    </dl>
+                </div>
+            </section>
         }
-    </div>
+    }
+    else
+    {
+            <div class="alert alert-danger text-center" role="alert">
+                <i class="fal fa-exclamation-triangle"></i> <strong>@Model.NumberInput</strong> is not recognized as a valid Swedish Personal Identity Number!
+            </div>
+    }
 }

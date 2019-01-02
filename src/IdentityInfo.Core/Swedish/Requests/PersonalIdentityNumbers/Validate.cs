@@ -17,12 +17,14 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
         {
             public Task<Result> Handle(Query request, CancellationToken cancellationToken)
             {
-                if (SwedishPersonalIdentityNumber.TryParse(request.Number, out var result))
+                var number = request.Number ?? string.Empty;
+
+                if (SwedishPersonalIdentityNumber.TryParse(number, out var result))
                 {
-                    return Task.FromResult(Result.Valid(request.Number, new FlatSwedishPersonalIdentityNumber(result)));
+                    return Task.FromResult(Result.Valid(number, new FlatSwedishPersonalIdentityNumber(result)));
                 }
 
-                return Task.FromResult(Result.Invalid(request.Number));
+                return Task.FromResult(Result.Invalid(number));
             }
         }
 
