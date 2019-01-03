@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using ActiveLogin.Identity.Swedish;
 
 namespace IdentityInfo.Core.Swedish.Testdata
 {
-    public struct FlatSwedishPersonalIdentityNumber
+    public struct FlatSwedishPersonalIdentityNumber : IEquatable<FlatSwedishPersonalIdentityNumber>
     {
         private static int? TryGetAgeHint(SwedishPersonalIdentityNumber pin, DateTime dateOfBirthHint)
         {
@@ -41,5 +42,31 @@ namespace IdentityInfo.Core.Swedish.Testdata
         public DateTime DateOfBirthHint { get; }
         public Gender GenderHint { get; }
         public int? AgeHint { get; }
+
+
+        public override bool Equals(object obj)
+        {
+            return obj is FlatSwedishPersonalIdentityNumber && Equals((FlatSwedishPersonalIdentityNumber)obj);
+        }
+
+        public bool Equals(FlatSwedishPersonalIdentityNumber other)
+        {
+            return TwelveDigitString == other.TwelveDigitString;
+        }
+
+        public override int GetHashCode()
+        {
+            return TwelveDigitString.GetHashCode();
+        }
+
+        public static bool operator ==(FlatSwedishPersonalIdentityNumber number1, FlatSwedishPersonalIdentityNumber number2)
+        {
+            return number1.Equals(number2);
+        }
+
+        public static bool operator !=(FlatSwedishPersonalIdentityNumber number1, FlatSwedishPersonalIdentityNumber number2)
+        {
+            return !(number1 == number2);
+        }
     }
 }

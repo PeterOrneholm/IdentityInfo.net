@@ -11,26 +11,26 @@
 </h1>
 
 <p class="lead py-3">
-    Swedish Personal Identity Numbers (PIN) should <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr/sensitive-personal-data/">be treated as personal data</a> and therefore a valid PIN can't be used in scenarios such as testing. For this very purpose <a href="https://skatteverket.entryscape.net/catalog/9/datasets/147">Skatteverket has issued a list of testdata</a> with numbers guaranteed not to be given to a person, and they are therefore safe to use. The list below builds upon that orignal list, but enhances it by extracting information such as date of birth, gender and age.
+    Swedish Personal Identity Numbers (PIN) should <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr/sensitive-personal-data/">be treated as personal data</a> and therefore a valid PIN can't be used in scenarios such as testing. For this very purpose <a href="https://www.skatteverket.se/omoss/utvecklingavdigitalatjanster/oppnadatapsidata.4.361dc8c15312eff6fd1736c.html">Skatteverket has issued</a> a <a href="https://skatteverket.entryscape.net/catalog/9/datasets/147">list of testdata</a> with numbers guaranteed not to be given to a person, and they are therefore safe to use. The list below builds upon that orignal list, but enhances it by extracting information such as date of birth, gender and age.
 </p>
 
 <form asp-action="TestDataList" method="get">
     <div class="form-row">
         <div class="form-group col-md-6 col-lg-2">
             <label asp-for="Query.DateOfBirth.From">Date of Birth <small class="text-muted">(from)</small></label>
-            <input type="date" class="form-control" name="dateofbirth.from" asp-for="Query.DateOfBirth.From" />
+            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="dateofbirth.from" value="@Model.Query.DateOfBirth?.From?.ToString("yyyy-MM-dd")" min="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" max="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" placeholder="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" />
         </div>
         <div class="form-group col-md-6 col-lg-2">
             <label asp-for="Query.DateOfBirth.To">Date of Birth <small class="text-muted">(to)</small></label>
-            <input type="date" class="form-control" name="dateofbirth.to" asp-for="Query.DateOfBirth.To" />
+            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="dateofbirth.to" value="@Model.Query.DateOfBirth?.To?.ToString("yyyy-MM-dd")" min="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" max="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" placeholder="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" />
         </div>
         <div class="form-group col-md-6 col-lg-2">
             <label asp-for="Query.Age.From">Age <small class="text-muted">(from)</small></label>
-            <input type="number" class="form-control" name="age.from" asp-for="Query.Age.From" min="0" />
+            <input type="number" class="form-control" name="age.from" asp-for="Query.Age.From" min="@Model.Result.TotalAgeRange.From?.ToString("D")" max="@Model.Result.TotalAgeRange.To?.ToString("D")" placeholder="@Model.Result.TotalAgeRange.From?.ToString("D")" />
         </div>
         <div class="form-group col-md-6 col-lg-2">
             <label asp-for="Query.Age.To">Age <small class="text-muted">(to)</small></label>
-            <input type="number" class="form-control" name="age.to" asp-for="Query.Age.To" />
+            <input type="number" class="form-control" name="age.to" asp-for="Query.Age.To" min="@Model.Result.TotalAgeRange.From?.ToString("D")" max="@Model.Result.TotalAgeRange.To?.ToString("D")" placeholder="@Model.Result.TotalAgeRange.To?.ToString("D")" />
         </div>
         <div class="form-group col-md-6 col-lg-2">
             <label asp-for="Query.Gender">Gender</label>

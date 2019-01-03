@@ -8,6 +8,7 @@ namespace IdentityInfo.Core.Swedish.Testdata
     public class FlatSwedishPersonalIdentityNumbersTestdataProvider : IFlatSwedishPersonalIdentityNumbersTestdataProvider
     {
         private readonly Lazy<Task<IEnumerable<FlatSwedishPersonalIdentityNumber>>> _numbers;
+        private readonly Lazy<Task<HashSet<FlatSwedishPersonalIdentityNumber>>> _numbersHashSet;
 
         public FlatSwedishPersonalIdentityNumbersTestdataProvider(ISwedishPersonalIdentityNumbersTestdataProvider swedishPersonalIdentityNumbersTestdataProvider)
         {
@@ -20,11 +21,23 @@ namespace IdentityInfo.Core.Swedish.Testdata
 
                 return orderedFlatNumbers;
             });
+
+            _numbersHashSet = new Lazy<Task<HashSet<FlatSwedishPersonalIdentityNumber>>>(async () =>
+            {
+                var numbers = await _numbers.Value;
+                return new HashSet<FlatSwedishPersonalIdentityNumber>(numbers);
+            });
         }
 
         public async Task<IEnumerable<FlatSwedishPersonalIdentityNumber>> GetFlatSwedishPersonalIdentityNumbersAsync()
         {
             return await _numbers.Value;
+        }
+
+        public async Task<bool> Contains(FlatSwedishPersonalIdentityNumber swedishPersonalIdentityNumber)
+        {
+            var numbersHashSet = await _numbersHashSet.Value;
+            return numbersHashSet.Contains(swedishPersonalIdentityNumber);
         }
     }
 }

@@ -15,40 +15,51 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
 
         public class Handler : IRequestHandler<Query, Result>
         {
-            public Task<Result> Handle(Query request, CancellationToken cancellationToken)
+            private readonly IFlatSwedishPersonalIdentityNumbersTestdataProvider _flatSwedishPersonalIdentityNumbersTestdataProvider;
+
+            public Handler(IFlatSwedishPersonalIdentityNumbersTestdataProvider flatSwedishPersonalIdentityNumbersTestdataProvider)
+            {
+                _flatSwedishPersonalIdentityNumbersTestdataProvider = flatSwedishPersonalIdentityNumbersTestdataProvider;
+            }
+
+            public async Task<Result> Handle(Query request, CancellationToken cancellationToken)
             {
                 var number = request.Number ?? string.Empty;
 
                 if (SwedishPersonalIdentityNumber.TryParse(number, out var result))
                 {
-                    return Task.FromResult(Result.Valid(number, new FlatSwedishPersonalIdentityNumber(result)));
+                    var flatSwedishPersonalIdentityNumber = new FlatSwedishPersonalIdentityNumber(result);
+                    var isTestdataNumber = await _flatSwedishPersonalIdentityNumbersTestdataProvider.Contains(flatSwedishPersonalIdentityNumber);
+                    return Result.Valid(number, isTestdataNumber, flatSwedishPersonalIdentityNumber);
                 }
 
-                return Task.FromResult(Result.Invalid(number));
+                return Result.Invalid(number);
             }
         }
 
         public class Result
         {
-            private Result(string numberInput, bool isValid, FlatSwedishPersonalIdentityNumber? number)
+            private Result(string numberInput, bool isValid, bool isTestdataNumber, FlatSwedishPersonalIdentityNumber? number)
             {
                 NumberInput = numberInput;
                 IsValid = isValid;
+                IsTestdataNumber = isTestdataNumber;
                 Number = number;
             }
 
-            public static Result Valid(string input, FlatSwedishPersonalIdentityNumber number)
+            public static Result Valid(string input, bool isTestdataNumber, FlatSwedishPersonalIdentityNumber number)
             {
-                return new Result(input, true, number);
+                return new Result(input, true, isTestdataNumber, number);
             }
 
             public static Result Invalid(string input)
             {
-                return new Result(input, false, null);
+                return new Result(input, false, false, null);
             }
 
             public string NumberInput { get; }
             public bool IsValid { get; }
+            public bool IsTestdataNumber { get; }
             public FlatSwedishPersonalIdentityNumber? Number { get; }
         }
     }

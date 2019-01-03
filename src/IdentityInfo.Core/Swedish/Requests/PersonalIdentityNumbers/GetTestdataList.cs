@@ -24,12 +24,6 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
             public Range<DateTime> DateOfBirth { get; set; }
             public Range<int> Age { get; set; }
 
-            public class Range<T> where T : struct
-            {
-                public T? From { get; set; }
-                public T? To { get; set; }
-            }
-
             public string ToQueryString()
             {
                 return ToQueryString(this.Offset);
@@ -112,7 +106,19 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
                 var filteredTestdataList = filteredTestdata.ToList();
                 var paginatedTestData = Paginate(request, filteredTestdataList);
                
-                return new Result(paginatedTestData, filteredTestdataList.Count, testdataList.Count);
+                var totalAgeRange = new Range<int>
+                {
+                    From = testdataList.Where(x => x.AgeHint.HasValue).Min(x => x.AgeHint),
+                    To = testdataList.Where(x => x.AgeHint.HasValue).Max(x => x.AgeHint)
+                };
+
+                var totalDateOfBirthRange = new Range<DateTime>
+                {
+                    From = testdataList.Min(x => x.DateOfBirthHint),
+                    To = testdataList.Max(x => x.DateOfBirthHint)
+                };
+
+                return new Result(paginatedTestData, filteredTestdataList.Count, testdataList.Count, totalAgeRange, totalDateOfBirthRange);
             }
 
             private static IEnumerable<FlatSwedishPersonalIdentityNumber> ApplyFilters(Query request, IEnumerable<FlatSwedishPersonalIdentityNumber> filteredTestdata)
@@ -142,7 +148,7 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
                 return filteredItems;
             }
 
-            private static IEnumerable<FlatSwedishPersonalIdentityNumber> FilterRange<T>(IEnumerable<FlatSwedishPersonalIdentityNumber> items, Query.Range<T> range, Func<FlatSwedishPersonalIdentityNumber, T> valueGetter) where T : struct, IComparable<T>
+            private static IEnumerable<FlatSwedishPersonalIdentityNumber> FilterRange<T>(IEnumerable<FlatSwedishPersonalIdentityNumber> items, Range<T> range, Func<FlatSwedishPersonalIdentityNumber, T> valueGetter) where T : struct, IComparable<T>
             {
                 var filteredItems = items;
 
@@ -177,16 +183,26 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
 
         public class Result
         {
-            public Result(IEnumerable<FlatSwedishPersonalIdentityNumber> filteredNumbers, int filteredNumbersCount, int totalNumbers)
+            public Result(IEnumerable<FlatSwedishPersonalIdentityNumber> filteredNumbers, int filteredNumbersCount, int totalNumbers, Range<int> totalAgeRange, Range<DateTime> totalDateOfBirthRange)
             {
                 FilteredNumbers = filteredNumbers;
                 FilteredNumbersCount = filteredNumbersCount;
                 TotalNumbers = totalNumbers;
+                TotalAgeRange = totalAgeRange;
+                TotalDateOfBirthRange = totalDateOfBirthRange;
             }
 
             public IEnumerable<FlatSwedishPersonalIdentityNumber> FilteredNumbers { get; }
             public int FilteredNumbersCount { get; }
             public int TotalNumbers { get; }
+            public Range<int> TotalAgeRange { get; }
+            public Range<DateTime> TotalDateOfBirthRange { get; }
+        }
+
+        public class Range<T> where T : struct
+        {
+            public T? From { get; set; }
+            public T? To { get; set; }
         }
     }
 }

@@ -1,0 +1,20 @@
+{
+  "name": "Swedish Identity Info",
+  "short_name": "Identity Info",
+  "icons": [
+    {
+      "src": "/static/icons/identityinfonet-logo-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icons/identityinfonet-logo-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#2f4f4f",
+  "background_color": "#2f4f4f",
+  "start_url": "https://swedish.identityinfo.net/",
+  "display": "standalone"
+}

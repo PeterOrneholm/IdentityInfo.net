@@ -79,3 +79,11 @@ thead.thead-sticky tr th {
 .ii-spin-info-table tr > :last-child {
     width: 100%;
 }
+
+/*input::-webkit-datetime-edit {
+    color: transparent; 
+}
+
+input:focus::-webkit-datetime-edit {
+    color: rgba(255, 255, 255, .46) !important; 
+}*/
