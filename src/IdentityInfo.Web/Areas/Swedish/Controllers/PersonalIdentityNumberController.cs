@@ -49,5 +49,17 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
             var viewModel = new SwedishPersonalIdentityNumberTestdataListViewModel(query, result);
             return View(viewModel);
         }
+
+        [HttpGet("/api/swedish/personalidentitynumber/testdata")]
+        public async Task<IActionResult> TestDataListApi([FromQuery] GetTestdataList.Query query)
+        {
+            if (query.Limit > 1000)
+            {
+                return new BadRequestResult();
+            }
+
+            var result = await _meditator.Send(query);
+            return Json(result.FilteredNumbers);
+        }
     }
 }
