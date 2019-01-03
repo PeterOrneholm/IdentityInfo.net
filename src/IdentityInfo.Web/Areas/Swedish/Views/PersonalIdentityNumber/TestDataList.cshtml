@@ -106,7 +106,7 @@
                             <i class="fal fa-@(number.GenderHint == Gender.Female ? "venus" : "mars")" title="@number.GenderHint"></i>
                             @number.GenderHint
                         </td>
-                        <td>@number.DateOfBirthHint.ToShortDateString()</td>
+                        <td>@number.DateOfBirthHint.ToString("yyyy-MM-dd")</td>
                         <td>@(number.AgeHint?.ToString("D") ?? "N/A")</td>
                         <td><a asp-action="Validate" asp-route-number="@number.TwelveDigitString" title="Show more details"><i class="fal fa-id-badge"></i></a></td>
                     </tr>
