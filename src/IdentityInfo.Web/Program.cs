@@ -12,6 +12,7 @@ namespace IdentityInfo.Web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureKestrel(options => { options.AddServerHeader = false; })
                 .UseApplicationInsights()
                 .UseStartup<Startup>();
     }

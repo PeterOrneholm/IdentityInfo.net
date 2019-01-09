@@ -50,16 +50,11 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
             return View(viewModel);
         }
 
-        [HttpGet("/api/swedish/personalidentitynumber/testdata")]
-        public async Task<IActionResult> TestDataListApi([FromQuery] GetTestdataList.Query query)
+        [HttpGet("/api/swedish/personalidentitynumber/testdata/json")]
+        public async Task<IActionResult> TestDataListApi([FromQuery] GetTestdataList.ApiQuery query)
         {
-            if (query.Limit > 1000)
-            {
-                return new BadRequestResult();
-            }
-
             var result = await _meditator.Send(query);
-            return Json(result.FilteredNumbers);
+            return Json(result);
         }
     }
 }
