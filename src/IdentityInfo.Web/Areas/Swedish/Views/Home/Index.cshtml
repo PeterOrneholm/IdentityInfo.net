@@ -5,38 +5,62 @@
 <section class="card bg-white text-center mb-5">
     <div class="card-body py-5">
         <h1 class="card-title">Swedish Identity Info</h1>
-        <p class="card-text lead text-muted">Pellentesque sollicitudin ex a orci hendrerit ullamcorper in in nulla. Nunc feugiat enim eget hendrerit faucibus. Nullam sed justo eros. Curabitur pellentesque ullamcorper ligula, non viverra sem blandit vel. Cras rhoncus, mi ac fringilla placerat.</p>
+        <p class="card-text lead text-muted">
+            Swedish Identity Info is a site that aims to provide info and data regarding identities in Sweden.
+        </p>
+        <p class="card-text lead text-muted">
+            Intitially there is support for Swedish Personal Identity Number (personnummer), but aims to expand with support for Swedish Coordination Number (samordningsnummer) and Swedish Company Registration Number (organisationsnummer).
+        </p>
     </div>
 </section>
 
-<section>
+
+<section class="mb-5">
+    <h2 class="text-center mb-5">Swedish Personal Identity Number</h2>
+
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">Info &amp; Definition</h5>
+                    <p class="card-text">Read about how a personal identity number is defined and more info about the structure.</p>
+                    <a class="btn btn-primary" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="Index">Read more</a>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">Validate</h5>
+                    <p class="card-text">Validate wheter or not a specific number is a valid personal identity number.</p>
+                    <a class="btn btn-primary" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="Validate">Validate</a>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">Testdata</h5>
+                    <p class="card-text">List of tesdata that provides GDPR complient personal identity numbers for non existing persons.</p>
+                    <a class="btn btn-primary" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="TestDataList">View testdata</a>
                 </div>
             </div>
         </div>
     </div>
+</section>
+
+<section>
+    <h2 class="text-center mb-5">Credits</h2>
+    
+    <p class="text-center lead text-muted">
+        Swedish Personal Identity Number is created by <a href="https://twitter.com/PeterOrneholm">Peter Örneholm</a> as a hobby project to share info about swedish identities while exploring open source, Azure and other technologies :)
+    </p>
+
+    <p class="text-center lead text-muted">
+        Swedish Personal Identity Number is heavily dependant on <a href="https://github.com/ActiveLogin/ActiveLogin.Identity">ActiveLogin.Identity</a> for parsing, normalizing and extracting info out of the identity numbers. Thanks <a href="https://twitter.com/PeterOrneholm">Peter Örneholm</a> and <a href="https://twitter.com/Emmet_Ray">Viktor Andersson</a> who are the main contributors of that.
+    </p>
+    
+    <p class="text-center lead text-muted">
+        All <a href="https://github.com/PeterOrneholm/identityinfo.net">source code is available on GitHub</a>, feel free to do a PR or file an Issue if you have feedback!
+    </p>
 </section>
