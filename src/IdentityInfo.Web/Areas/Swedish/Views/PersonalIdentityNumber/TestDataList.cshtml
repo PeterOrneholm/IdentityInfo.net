@@ -18,11 +18,11 @@
     <div class="form-row">
         <div class="form-group col-md-6 col-lg-2">
             <label asp-for="Query.DateOfBirth.From">Date of Birth <small class="text-muted">(from)</small></label>
-            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="dateofbirth.from" value="@Model.Query.DateOfBirth?.From?.ToString("yyyy-MM-dd")" min="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" max="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" placeholder="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" />
+            <input type="date" class="form-control" name="dateofbirth.from" value="@Model.Query.DateOfBirth?.From?.ToString("yyyy-MM-dd")" min="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" max="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" title="From @Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" />
         </div>
         <div class="form-group col-md-6 col-lg-2">
             <label asp-for="Query.DateOfBirth.To">Date of Birth <small class="text-muted">(to)</small></label>
-            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="dateofbirth.to" value="@Model.Query.DateOfBirth?.To?.ToString("yyyy-MM-dd")" min="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" max="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" placeholder="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" />
+            <input type="date" class="form-control" name="dateofbirth.to" value="@Model.Query.DateOfBirth?.To?.ToString("yyyy-MM-dd")" min="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" max="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" title="To @Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" />
         </div>
         <div class="form-group col-md-6 col-lg-2">
             <label asp-for="Query.Age.From">Age <small class="text-muted">(from)</small></label>
