@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using ActiveLogin.Identity.Swedish;
+using ActiveLogin.Identity.Swedish.Extensions;
 
 namespace IdentityInfo.Core.Swedish.Testdata
 {
