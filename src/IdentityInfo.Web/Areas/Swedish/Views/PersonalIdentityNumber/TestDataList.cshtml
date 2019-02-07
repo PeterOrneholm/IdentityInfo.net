@@ -72,7 +72,6 @@
         <table class="table table-striped table-hover">
             <thead class="thead-dark thead-sticky">
                 <tr>
-                    <th scope="col"><i class="fal fa-clipboard"></i></th>
                     <th scope="col">10 Digit</th>
                     <th scope="col">12 Digit</th>
                     <th scope="col" class="d-none d-lg-table-cell">Year</th>
@@ -84,7 +83,6 @@
                     <th scope="col">Gender</th>
                     <th scope="col">Date of Birth</th>
                     <th scope="col">Age</th>
-                    <th><i class="fal fa-id-badge"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -92,9 +90,8 @@
                 {
                     <tr>
                         <th scope="row">
-                            <a href="#" onclick="identityinfonet.copyToClipboard('@number.TenDigitString');return false;" title="Copy '@number.TenDigitString' to clipboard"><i class="fal fa-clipboard"></i></a>
+                            <a asp-action="Validate" asp-route-number="@number.TwelveDigitString" title="Show more details">@number.TenDigitString</a>
                         </th>
-                        <th scope="row">@number.TenDigitString</th>
                         <td>@number.TwelveDigitString</td>
                         <td class="d-none d-lg-table-cell">@number.Year</td>
                         <td class="d-none d-lg-table-cell">@number.Month</td>
@@ -108,7 +105,6 @@
                         </td>
                         <td>@number.DateOfBirthHint.ToString("yyyy-MM-dd")</td>
                         <td>@(number.AgeHint?.ToString("D") ?? "N/A")</td>
-                        <td><a asp-action="Validate" asp-route-number="@number.TwelveDigitString" title="Show more details"><i class="fal fa-id-badge"></i></a></td>
                     </tr>
                 }
             </tbody>
