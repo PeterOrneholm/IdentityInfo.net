@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ActiveLogin.Identity.Swedish" Version="2.0.0" />
-    <PackageReference Include="MediatR" Version="6.0.0" />
+    <PackageReference Include="ActiveLogin.Identity.Swedish" Version="2.0.2" />
+    <PackageReference Include="ActiveLogin.Identity.Swedish.TestData" Version="1.0.0-beta-1" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

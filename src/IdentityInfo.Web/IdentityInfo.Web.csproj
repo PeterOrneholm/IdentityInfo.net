@@ -8,20 +8,12 @@
     <ApplicationInsightsAnnotationResourceId>/subscriptions/60546205-7d7a-459c-8734-c3fde58f8aa1/resourcegroups/identityinfo-prod/providers/microsoft.insights/components/identityinfo-web-prod</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Testdata\SwedishPersonalIdentityNumbers_Testdata_181217.csv" />
-  </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Testdata\SwedishPersonalIdentityNumbers_Testdata_181217.csv" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <PackageReference Include="ActiveLogin.Identity.Swedish" Version="2.0.0" />
-    <PackageReference Include="MediatR" Version="6.0.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.1" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.5.1" />
+    <PackageReference Include="ActiveLogin.Identity.Swedish" Version="2.0.2" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>

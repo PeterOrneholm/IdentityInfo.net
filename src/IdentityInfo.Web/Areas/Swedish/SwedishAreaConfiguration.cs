@@ -13,12 +13,7 @@ namespace IdentityInfo.Web.Areas.Swedish
 
         public static void AddSwedishAreaServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<ISwedishPersonalIdentityNumbersTestdataProvider>(provider =>
-            {
-                var assembly = typeof(SwedishAreaConfiguration).GetTypeInfo().Assembly;
-                var csvStream = assembly.GetManifestResourceStream("IdentityInfo.Web.Testdata.SwedishPersonalIdentityNumbers_Testdata_181217.csv");
-                return new SwedishPersonalIdentityNumbersCsvTestdataProvider(csvStream);
-            });
+            services.AddSingleton<ISwedishPersonalIdentityNumbersTestdataProvider, SwedishPersonalIdentityNumbersTestdataProvider>();
 
             services.AddSingleton<IFlatSwedishPersonalIdentityNumbersTestdataProvider, FlatSwedishPersonalIdentityNumbersTestdataProvider>();
 
