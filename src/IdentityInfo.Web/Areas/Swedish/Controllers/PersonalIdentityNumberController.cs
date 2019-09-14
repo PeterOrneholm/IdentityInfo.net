@@ -20,7 +20,7 @@ namespace IdentityInfo.Web.Areas.Swedish.Controllers
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
