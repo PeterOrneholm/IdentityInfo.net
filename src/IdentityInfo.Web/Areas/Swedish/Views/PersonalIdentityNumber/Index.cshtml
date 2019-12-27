@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Info & Definition - Swedish Personal Identity Numbers";
 }
 
@@ -7,6 +7,151 @@
     <small class="text-muted">Swedish Personal Identity Numbers</small>
 </h1>
 
-<p class="lead py-3">
-    Work in progress :) Until finished, please see <a href="https://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)">Wikipedia</a>.
-</p>
+<div class="lead py-3">
+    <p>
+        The personal identity number (personnummer) is the Swedish national identification number. It is a ten or twelve digit number that is used in Sweden to identify individuals.
+    </p>
+</div>
+
+<div>
+    <h2 class="h3">Pattern</h2>
+
+    <div class="mb-2">
+        <p>
+            The official version of a Swedish Personal Identity Number (defined in law) follow this pattern:
+        </p>
+
+        <ul class="list-unstyled">
+            <li><strong>YYMMDD-BBBC</strong></li>
+            <li><strong>YYMMDD+BBBC</strong></li>
+        </ul>
+
+        <p>
+            The delimiter is <strong>-</strong> (hyphen) by default but changes to <strong>+</strong> (plus) the year you turn 100. See details below.<br />
+        </p>
+    </div>
+
+    <div class="mb-2">
+        <p>
+            It's quite common to leave the hyphen out, like this:
+        </p>
+
+        <ul class="list-unstyled">
+            <li><strong>YYMMDDBBBC</strong></li>
+        </ul>
+    </div>
+
+    <div class="mb-2">
+        <p>
+            When stored or handled in a structured way, the law states you should handle it with the full length of the year, like this:
+        </p>
+
+        <ul class="list-unstyled">
+            <li><strong>YYYYMMDDBBBC</strong></li>
+        </ul>
+    </div>
+
+    <h2 class="h3">Parts</h2>
+
+    <p>
+        The parts are:
+    </p>
+
+    <h3 class="h4">Birthdate</h3>
+
+    <div class="mb-2">
+        <p>
+            The first 6 digits correspond to the person's birthday.
+        </p>
+        <p>
+            <em>
+                <strong>Note:</strong>
+                In case the specific day is out of numbers, another day (close to the correct one) is used.
+            </em>
+        </p>
+        <ul class="list-unstyled">
+            <li>
+                <strong>YY:</strong> Year
+            </li>
+            <li>
+                <strong>MM:</strong> Month
+            </li>
+            <li>
+                <strong>DD:</strong> Day
+            </li>
+        </ul>
+    </div>
+
+    <h3 class="h4">Delimiter</h3>
+
+    <div class="mb-2">
+        <p>
+            They are followed by a hyphen or a plus.<br />
+            By default it is a hyphen, but the year a person turns 100 the hyphen with a plus sign.<br />
+        </p>
+        <p>
+            <em>
+                <strong>Note:</strong>
+                A common misunderstanding is that the hyphen is replaced with a plus sign when the person turns 100 years old, but according to the definition, it happens the first of January that year.
+            </em>
+        </p>
+        <ul class="list-unstyled">
+            <li>
+                <strong>-:</strong> Hyphen delimiter
+            </li>
+            <li>
+                <strong>+:</strong> Plus delimiter
+            </li>
+        </ul>
+    </div>
+
+    <h3 class="h4">Birth number</h3>
+
+    <div class="mb-2">
+        <p>
+            Among the four last digits, the three first are a birth number (serial number).
+        </p>
+        <p>
+            <em>
+                <strong>Note:</strong>
+                For the last digit among these three, an odd number is assigned to males and an even number to females.
+            </em>
+        </p>
+        <ul class="list-unstyled">
+            <li>
+                <strong>BBB:</strong> Birth number
+            </li>
+        </ul>
+    </div>
+
+    <h3 class="h4">Checksum</h3>
+
+    <div class="mb-2">
+        <p>
+            The last digit is a checksum calculated using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a>.
+        </p>
+        <p>
+            To calculate the checksum: Use the 10 digit version, multiply the individual digits in the identity number and 212121-212. The resulting products (a two digit product, such as 16, would be converted to 1 + 6) are added together.
+            The checksum is the last digit of 10 minus the last digit in this sum (note that if the last digit of the sum is zero, the checksum is 0).
+        </p>
+        <ul class="list-unstyled">
+            <li>
+                <strong>C:</strong> Checksum
+            </li>
+        </ul>
+    </div>
+
+    <h2 class="h3">Sources</h2>
+
+    <p>
+        The definition of a Swedish personal identity number is described in Swedish law (Folkbokföringslagen), there are also other sources for clarifications listed below.
+    </p>
+
+    <ul>
+        <li><a href="https://www.riksdagen.se/sv/dokument-lagar/dokument/svensk-forfattningssamling/folkbokforingslag-1991481_sfs-1991-481#P18">Folkbokföringslag (1991:481)</a>)</li>
+        <li><a href="https://www.skatteverket.se/servicelankar/otherlanguages/inenglish/individualsandemployees/livinginsweden/personalidentitynumberandcoordinationnumber.4.2cf1b5cd163796a5c8b4295.html">Skatteverket (English)</a></li>
+        <li><a href="https://www.skatteverket.se/privat/folkbokforing/personnummerochsamordningsnummer.4.3810a01c150939e893f18c29.html">Skatteverket (Swedish)</a></li>
+        <li><a href="https://www.scb.se/contentassets/8d9d985ca9c84c6e8d879cc89a8ae479/ov9999_2016a01_br_be96br1601.pdf">Statistiska Centralbyrån (Swedish)</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)">Wikipedia (Personal identity number (Sweden))</a></li>
+    </ul>
+</div>
