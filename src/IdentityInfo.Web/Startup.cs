@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using IdentityInfo.Web.Areas.Swedish;
+using IdentityInfo.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,8 @@ namespace IdentityInfo.Web
                     Duration = 15 * 60
                 });
             });
+
+            services.Configure<GoogleAnalyticsOptions>(Configuration);
 
             services.AddSwedishAreaServices(Configuration);
             services.Configure<HttpsRedirectionOptions>(options => options.HttpsPort = 403);

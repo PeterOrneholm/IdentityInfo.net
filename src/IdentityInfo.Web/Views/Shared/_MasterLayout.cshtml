@@ -1,4 +1,6 @@
-﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+@using Microsoft.Extensions.Options
+@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+@inject IOptions<GoogleAnalyticsOptions> GoogleAnalyticsOptions
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,16 +21,21 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-LRlmVvLKVApDVGuspQFnRQJjkv0P7/YFrw84YYQtmYG4nK8c+M+NlmYDCv0rKWpG" crossorigin="anonymous">
     <link rel="stylesheet" href="~/static/main.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-418219-15"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
 
-        gtag('config', 'UA-418219-15');
-    </script>
+    @if (!string.IsNullOrWhiteSpace(GoogleAnalyticsOptions.Value.GoogleAnalyticsKey))
+    {
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=@(GoogleAnalyticsOptions.Value.GoogleAnalyticsKey)"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
+            gtag('config', '@GoogleAnalyticsOptions.Value.GoogleAnalyticsKey');
+        </script>
+    }
+
+    <!-- Application Insights -->
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
