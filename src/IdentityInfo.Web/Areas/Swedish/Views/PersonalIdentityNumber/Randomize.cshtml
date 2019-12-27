@@ -14,8 +14,16 @@
 </p>
 
 <div class="row">
-    <div class="col">
-        <h2 class="h3">Numbers</h2>
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+        <a class="btn btn-primary btn-block" href="#" onclick="location.reload(); return false;">Get @Model.Count new numbers</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm">
+        <h2 class="h3 mt-3">Numbers</h2>
         <div class="list-group">
             @foreach (var number in Model.Numbers)
             {
@@ -25,25 +33,21 @@
             }
         </div>
     </div>
-    <div class="col">
-        <h2 class="h3">10 digit versions</h2>
-        <textarea class="form-control" style="min-height: @(49 * Model.Count)px;">
-@foreach (var number in Model.Numbers)
+    <div class="col-sm">
+        <h2 class="h3 mt-3">10 digit versions</h2>
+<textarea class="form-control" style="min-height: @(49 * Model.Count)px;">@foreach (var number in Model.Numbers)
 {
     @number.TenDigitString
     @Html.Raw("\n")
-}
-        </textarea>
+}</textarea>
     </div>
-    <div class="col">
-        <h2 class="h3">12 digit versions</h2>
-        <textarea class="form-control" style="min-height: @(49 * Model.Count)px;">
-@foreach (var number in Model.Numbers)
+    <div class="col-sm">
+        <h2 class="h3 mt-3">12 digit versions</h2>
+<textarea class="form-control" style="min-height: @(49 * Model.Count)px;">@foreach (var number in Model.Numbers)
 {
     @number.TwelveDigitString
     @Html.Raw("\n")
-}
-        </textarea>
+}</textarea>
     </div>
 </div>
 
