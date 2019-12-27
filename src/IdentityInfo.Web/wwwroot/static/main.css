@@ -1,4 +1,4 @@
-﻿body {
+body {
 }
 
 thead.thead-sticky tr th {
@@ -80,10 +80,13 @@ thead.thead-sticky tr th {
     width: 100%;
 }
 
-/*input::-webkit-datetime-edit {
-    color: transparent; 
+.btn.ii-card-button-bottom {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    right: 20px;
 }
 
-input:focus::-webkit-datetime-edit {
-    color: rgba(255, 255, 255, .46) !important; 
-}*/
+.card-body.ii-card-button-bottom {
+    padding-bottom: 60px;
+}

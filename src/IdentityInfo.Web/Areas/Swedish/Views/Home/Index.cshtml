@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -18,32 +18,33 @@
 <section class="mb-5">
     <h2 class="text-center mb-5">Swedish Personal Identity Number</h2>
 
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Info &amp; Definition</h5>
-                    <p class="card-text">Read about how a personal identity number is defined and more info about the structure.</p>
-                    <a class="btn btn-primary" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="Index">Read more</a>
-                </div>
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body ii-card-button-bottom">
+                <h5 class="card-title">Info &amp; Definition</h5>
+                <p class="card-text">Read about how a personal identity number is defined and more info about the structure.</p>
+                <a class="btn btn-primary ii-card-button-bottom" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="Index">Read more</a>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Validate</h5>
-                    <p class="card-text">Validate wheter or not a specific number is a valid personal identity number.</p>
-                    <a class="btn btn-primary" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="Validate">Validate</a>
-                </div>
+        <div class="card">
+            <div class="card-body ii-card-button-bottom">
+                <h5 class="card-title">Randomize</h5>
+                <p class="card-text">Randomize a valid personal identity number safe from the testdata.</p>
+                <a class="btn btn-primary ii-card-button-bottom" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="Randomize">Randomize</a>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Testdata</h5>
-                    <p class="card-text">List of tesdata that provides GDPR complient personal identity numbers for non existing persons.</p>
-                    <a class="btn btn-primary" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="TestDataList">View testdata</a>
-                </div>
+        <div class="card">
+            <div class="card-body ii-card-button-bottom">
+                <h5 class="card-title">Validate</h5>
+                <p class="card-text">Validate whether or not a specific number is a valid personal identity number.</p>
+                <a class="btn btn-primary ii-card-button-bottom" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="Validate">Validate</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body ii-card-button-bottom">
+                <h5 class="card-title">Testdata</h5>
+                <p class="card-text">List of tesdata that provides GDPR complient personal identity numbers for non existing persons.</p>
+                <a class="btn btn-primary ii-card-button-bottom" asp-area="Swedish" asp-controller="PersonalIdentityNumber" asp-action="TestDataList">View testdata</a>
             </div>
         </div>
     </div>
@@ -51,7 +52,7 @@
 
 <section>
     <h2 class="text-center mb-5">Credits</h2>
-    
+
     <p class="text-center lead text-muted">
         Swedish Personal Identity Number is created by <a href="https://twitter.com/PeterOrneholm">Peter Örneholm</a> as a hobby project to share info about swedish identities while exploring open source, Azure and other technologies :)
     </p>
@@ -59,7 +60,7 @@
     <p class="text-center lead text-muted">
         Swedish Personal Identity Number is heavily dependant on <a href="https://github.com/ActiveLogin/ActiveLogin.Identity">ActiveLogin.Identity</a> for parsing, normalizing and extracting info out of the identity numbers. Thanks <a href="https://twitter.com/PeterOrneholm">Peter Örneholm</a> and <a href="https://twitter.com/Emmet_Ray">Viktor Andersson</a> who are the main contributors of that.
     </p>
-    
+
     <p class="text-center lead text-muted">
         All <a href="https://github.com/PeterOrneholm/identityinfo.net">source code is available on GitHub</a>, feel free to do a PR or file an Issue if you have feedback!
     </p>

@@ -1,0 +1,57 @@
+@using ActiveLogin.Identity.Swedish
+@model Randomize.Result;
+@{
+    ViewBag.Title = "Randomize - Swedish Personal Identity Numbers";
+}
+
+<h1 class="h2">
+    Randomize
+    <small class="text-muted">Swedish Personal Identity Numbers</small>
+</h1>
+
+<p class="lead py-3">
+    Here are @Model.Count random Swedish Personal Identity Numbers from the list of <a asp-action="TestDataList">testdata</a>.
+</p>
+
+<div class="row">
+    <div class="col">
+        <h2 class="h3">Numbers</h2>
+        <div class="list-group">
+            @foreach (var number in Model.Numbers)
+            {
+                <a href="#pin-@number.TwelveDigitString" class="list-group-item list-group-item-action">
+                    @number.TenDigitString <em class="text-muted">(@number.AgeHint year old @(number.GenderHint == Gender.Female ? "female" : "male"))</em>
+                </a>
+            }
+        </div>
+    </div>
+    <div class="col">
+        <h2 class="h3">10 digit versions</h2>
+        <textarea class="form-control" style="min-height: @(49 * Model.Count)px;">
+@foreach (var number in Model.Numbers)
+{
+    @number.TenDigitString
+    @Html.Raw("\n")
+}
+        </textarea>
+    </div>
+    <div class="col">
+        <h2 class="h3">12 digit versions</h2>
+        <textarea class="form-control" style="min-height: @(49 * Model.Count)px;">
+@foreach (var number in Model.Numbers)
+{
+    @number.TwelveDigitString
+    @Html.Raw("\n")
+}
+        </textarea>
+    </div>
+</div>
+
+<h2 class="h3 mt-4">Details</h2>
+
+@foreach (var number in Model.Numbers)
+{
+    <div class="mt-4" id="pin-@number.TwelveDigitString">
+        <partial name="_InfoCard" model="@number" view-data="@(new ViewDataDictionary(ViewData) { { "show-description", true } })" />
+    </div>
+}

@@ -23,14 +23,8 @@ namespace IdentityInfo.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(options =>
-            {
-                options.Filters.Add(new ResponseCacheAttribute
-                {
-                    Location = ResponseCacheLocation.Any,
-                    Duration = 15 * 60
-                });
-            });
+            services.AddControllersWithViews()
+                    .AddRazorRuntimeCompilation();
 
             services.Configure<GoogleAnalyticsOptions>(Configuration);
 
