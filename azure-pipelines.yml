@@ -1,0 +1,55 @@
+# Azure DevOps Pipeline
+
+name: $(Date:yyyyMMdd)$(Rev:r)
+
+variables:
+  dotnetBuildConfiguration: 'Release'
+  dotnetVerbosity: 'Detailed'
+
+trigger:
+- master
+
+stages:
+- stage: BuildWeb
+  displayName:  'Build web'
+  dependsOn: []
+  jobs:
+  - job: BuildWeb
+    displayName: 'Build'
+    strategy:
+      matrix:
+        Windows:
+          vmImage: 'windows-latest'
+          artifactName: 'web-windows'
+        macOS:
+          vmImage: 'macOS-latest'
+          artifactName: 'web-macos'
+        Linux:
+          vmImage: 'ubuntu-latest'
+          artifactName: 'web-linux'
+      maxParallel: 3
+
+    pool:
+      vmImage: '$(vmImage)'
+
+    variables:
+      pathToPublishProjects: '**/src/**/*.*sproj'
+
+    steps:
+
+    - task: UseDotNet@2
+      displayName: 'Install: .NET Core SDK'
+      inputs:
+        useGlobalJson: true
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish'
+      inputs:
+        command: publish
+        publishWebProjects: true
+        zipAfterPublish: true
+        projects: '$(pathToPublishProjects)'
+        arguments: '--configuration $(dotnetBuildConfiguration) --output $(build.artifactstagingdirectory)'
+
+    - publish: '$(Build.ArtifactStagingDirectory)'
+      artifact: '$(artifactName)'

@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityInfo.Web", "src\IdentityInfo.Web\IdentityInfo.Web.csproj", "{20279ACE-6181-436D-BA70-F25CFEBE63FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{267DE2A1-3203-45EA-931B-B8C8513DE0B3}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		global.json = global.json
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
@@ -16,11 +21,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{42B322B2-C3F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B1436B41-1C01-443D-A050-B08F01F3718E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityInfo.Web.Test", "test\IdentityInfo.Web.Test\IdentityInfo.Web.Test.csproj", "{B0C3B085-DE21-4881-A1EA-6EC01A1B4DEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityInfo.Web.Test", "test\IdentityInfo.Web.Test\IdentityInfo.Web.Test.csproj", "{B0C3B085-DE21-4881-A1EA-6EC01A1B4DEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityInfo.Core", "src\IdentityInfo.Core\IdentityInfo.Core.csproj", "{7931BDF4-2F15-463F-BAC2-EE7EF631454E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityInfo.Core", "src\IdentityInfo.Core\IdentityInfo.Core.csproj", "{7931BDF4-2F15-463F-BAC2-EE7EF631454E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityInfo.Core.Test", "test\IdentityInfo.Core.Test\IdentityInfo.Core.Test.csproj", "{07C85007-298D-4827-8132-E15ECA9BED43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityInfo.Core.Test", "test\IdentityInfo.Core.Test\IdentityInfo.Core.Test.csproj", "{07C85007-298D-4827-8132-E15ECA9BED43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6CA03175-E1DA-4642-A7E3-5CD3861921AE}"
+	ProjectSection(SolutionItems) = preProject
+		.github\pull_request_template.md = .github\pull_request_template.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +63,7 @@ Global
 		{B0C3B085-DE21-4881-A1EA-6EC01A1B4DEC} = {B1436B41-1C01-443D-A050-B08F01F3718E}
 		{7931BDF4-2F15-463F-BAC2-EE7EF631454E} = {42B322B2-C3F1-440A-AC32-082F9ACE2B57}
 		{07C85007-298D-4827-8132-E15ECA9BED43} = {B1436B41-1C01-443D-A050-B08F01F3718E}
+		{6CA03175-E1DA-4642-A7E3-5CD3861921AE} = {267DE2A1-3203-45EA-931B-B8C8513DE0B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5BF55CBA-D04F-4551-A129-F0D4FA721E32}

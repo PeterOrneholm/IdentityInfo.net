@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -16,12 +16,12 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
             public int? Offset { get; set; }
             public int? Limit { get; set; } 
 
-            public Range<int> Year { get; set; }
-            public Range<int> Month { get; set; }
-            public Range<int> Day { get; set; }
+            public Range<int>? Year { get; set; }
+            public Range<int>? Month { get; set; }
+            public Range<int>? Day { get; set; }
             public Gender? Gender { get; set; }
-            public Range<DateTime> DateOfBirth { get; set; }
-            public Range<int> Age { get; set; }
+            public Range<DateTime>? DateOfBirth { get; set; }
+            public Range<int>? Age { get; set; }
         }
 
         public class Query : QueryBase, IRequest<Result>
@@ -65,7 +65,7 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
                 return GetQueryString(queryStringParams);
             }
 
-            private static void AddRangeQueryStringParams<T>(Dictionary<string, string> queryStringParams, string name, Range<T> range, Func<T, string> serializer) where T : struct
+            private static void AddRangeQueryStringParams<T>(Dictionary<string, string> queryStringParams, string name, Range<T>? range, Func<T, string> serializer) where T : struct
             {
                 if (range == null)
                 {
@@ -177,7 +177,7 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
                 return filteredItems;
             }
 
-            private static IEnumerable<FlatSwedishPersonalIdentityNumber> FilterRange<T>(IEnumerable<FlatSwedishPersonalIdentityNumber> items, Range<T> range, Func<FlatSwedishPersonalIdentityNumber, T> valueGetter) where T : struct, IComparable<T>
+            private static IEnumerable<FlatSwedishPersonalIdentityNumber> FilterRange<T>(IEnumerable<FlatSwedishPersonalIdentityNumber> items, Range<T>? range, Func<FlatSwedishPersonalIdentityNumber, T> valueGetter) where T : struct, IComparable<T>
             {
                 var filteredItems = items;
 

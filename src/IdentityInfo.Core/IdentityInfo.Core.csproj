@@ -1,14 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <WarningsAsErrors>true</WarningsAsErrors>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
 
-  <ItemGroup>
-    <PackageReference Include="ActiveLogin.Identity.Swedish" Version="2.0.2" />
-    <PackageReference Include="ActiveLogin.Identity.Swedish.TestData" Version="1.0.0-beta-1" />
-    <PackageReference Include="MediatR" Version="7.0.0" />
-  </ItemGroup>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <NeutralLanguage>en</NeutralLanguage>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+        <Description>Swedish Identity Info is a site that aims to provide info and data regarding identities in Sweden.</Description>
+
+        <Authors>Peter Örneholm</Authors>
+        <Company>Orneholm AB</Company>
+        <Copyright>Copyright © Peter Örneholm</Copyright>
+
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/PeterOrneholm/IdentityInfo.net.git</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/PeterOrneholm/IdentityInfo.net</PackageProjectUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ActiveLogin.Identity.Swedish" Version="2.0.2" />
+        <PackageReference Include="ActiveLogin.Identity.Swedish.TestData" Version="1.0.0-beta-1" />
+        <PackageReference Include="MediatR" Version="7.0.0" />
+    </ItemGroup>
 
 </Project>

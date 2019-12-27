@@ -1,25 +1,36 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <UserSecretsId>ff6c177f-2e2d-4a75-bdc7-4469b33e0ee4</UserSecretsId>
-    <WarningsAsErrors>true</WarningsAsErrors>
-    <WarningsAsErrors></WarningsAsErrors>
-    <ApplicationInsightsResourceId>/subscriptions/60546205-7d7a-459c-8734-c3fde58f8aa1/resourcegroups/identityinfo-prod/providers/microsoft.insights/components/identityinfo-web-prod</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/60546205-7d7a-459c-8734-c3fde58f8aa1/resourcegroups/identityinfo-prod/providers/microsoft.insights/components/identityinfo-web-prod</ApplicationInsightsAnnotationResourceId>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <UserSecretsId>ff6c177f-2e2d-4a75-bdc7-4469b33e0ee4</UserSecretsId>
+
+        <LangVersion>latest</LangVersion>
+        <!--<Nullable>enable</Nullable>-->
+        <NeutralLanguage>en</NeutralLanguage>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+        <Description>Swedish Identity Info is a site that aims to provide info and data regarding identities in Sweden.</Description>
+
+        <Authors>Peter Örneholm</Authors>
+        <Company>Orneholm AB</Company>
+        <Copyright>Copyright © Peter Örneholm</Copyright>
+
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/PeterOrneholm/IdentityInfo.net.git</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/PeterOrneholm/IdentityInfo.net</PackageProjectUrl>
+    </PropertyGroup>
 
 
-  <ItemGroup>
-    <PackageReference Include="ActiveLogin.Identity.Swedish" Version="2.0.2" />
-    <PackageReference Include="MediatR" Version="7.0.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.1" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="ActiveLogin.Identity.Swedish" Version="2.0.2" />
+        <PackageReference Include="MediatR" Version="7.0.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.1" />
+    </ItemGroup>
 
 
-  <ItemGroup>
-    <ProjectReference Include="..\IdentityInfo.Core\IdentityInfo.Core.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\IdentityInfo.Core\IdentityInfo.Core.csproj" />
+    </ItemGroup>
 
 </Project>
