@@ -1,15 +1,15 @@
-@model IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers.Validate.Result;
+@model IdentityInfo.Core.Swedish.Requests.CoordinationNumbers.Validate.Result;
 @{
-    ViewBag.Title = "Validate - Swedish Personal Identity Numbers";
+    ViewBag.Title = "Validate - Swedish Coordination Numbers";
 }
 
 <h1 class="h2">
     Validate
-    <small class="text-muted">Swedish Personal Identity Numbers</small>
+    <small class="text-muted">Swedish Coordination Numbers</small>
 </h1>
 
 <p class="lead py-3">
-    A Swedish personal identity number can be written in a lot of different ways. It normally takes one of the standard forms (YYMMDD-BBBC, YYMMDD+BBBC or YYYYMMDDBBBC) but can also include variations with whitespaces etc. Use the form below to parse a value and find out data that be extracted form the number such as date of birth and gender.
+    A Swedish coordination number can be written in a lot of different ways. It normally takes one of the standard forms (YYMMDD-BBBC, YYMMDD+BBBC or YYYYMMDDBBBC) but can also include variations with whitespaces etc. Use the form below to parse a value and find out data that be extracted form the number such as date of birth and gender.
 </p>
 
 
@@ -18,7 +18,7 @@
         <div style="max-width: 400px; margin: 0 auto;">
             <form asp-action="Validate" method="get">
                 <div class="form-group">
-                    <label asp-for="NumberInput">Swedish Personal Identity Number</label>
+                    <label asp-for="NumberInput">Swedish Coordination Number</label>
                     <input type="tel" class="form-control form-control-lg text-center" name="number" asp-for="NumberInput" required maxlength="50" placeholder="YYMMDD-XXXX" />
                 </div>
                 <div class="form-group">
@@ -36,26 +36,26 @@
         if (!Model.IsTestdataNumber)
         {
             <div class="alert alert-success text-center" role="alert">
-                <i class="fal fa-badge-check"></i> <strong>@Model.NumberInput</strong> is recognized as a valid Swedish Personal Identity Number!
+                <i class="fal fa-badge-check"></i> <strong>@Model.NumberInput</strong> is recognized as a valid Swedish Coordination Number!
             </div>
         }
         else
         {
             <div class="alert alert-warning text-center" role="alert">
-                <i class="fal fa-exclamation-triangle"></i> <strong>@Model.NumberInput</strong> is recognized as a valid Swedish Personal Identity Number!<br />
+                <i class="fal fa-exclamation-triangle"></i> <strong>@Model.NumberInput</strong> is recognized as a valid Swedish Coordination Number!<br />
                 <strong>Note:</strong> It is found in the list of <a asp-action="TestDataList">testdata</a> that is forbidden to use in production!
             </div>
         }
 
-        if (Model.Number.HasValue)
+        if (Model.IsValid)
         {
-            <partial name="_InfoCard" model="@Model.Number.Value" view-data="@(new ViewDataDictionary(ViewData) { { "show-description", true } })" />
+            <partial name="_InfoCard" model="@Model.Number" view-data="@(new ViewDataDictionary(ViewData) { { "show-description", true } })" />
         }
     }
     else
     {
         <div class="alert alert-danger text-center" role="alert">
-            <i class="fal fa-exclamation-square"></i> <strong>@Model.NumberInput</strong> is not recognized as a valid Swedish Personal Identity Number!
+            <i class="fal fa-exclamation-square"></i> <strong>@Model.NumberInput</strong> is not recognized as a valid Swedish Coordination Number!
         </div>
     }
 }

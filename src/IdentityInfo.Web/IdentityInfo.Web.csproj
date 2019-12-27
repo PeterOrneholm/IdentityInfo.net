@@ -22,7 +22,7 @@
 
 
     <ItemGroup>
-        <PackageReference Include="ActiveLogin.Identity.Swedish" Version="2.0.2" />
+        <PackageReference Include="ActiveLogin.Identity.Swedish" Version="3.0.0-ci-201912172" />
         <PackageReference Include="MediatR" Version="7.0.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
         <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.1" />

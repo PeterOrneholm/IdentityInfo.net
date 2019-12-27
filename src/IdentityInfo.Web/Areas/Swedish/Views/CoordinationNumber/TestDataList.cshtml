@@ -1,0 +1,122 @@
+@using ActiveLogin.Identity.Swedish
+@using ActiveLogin.Identity.Swedish.Extensions
+@model SwedishCoordinationNumberTestdataListViewModel;
+
+@{
+    ViewBag.Title = "Testdata - Swedish Coordination Numbers";
+}
+
+    <h1 class="h2">
+        Testdata
+        <small class="text-muted">Swedish Coordination Numbers</small>
+    </h1>
+
+<p class="lead py-3">
+    Swedish Coordination Numbers should <a href="https://www.datainspektionen.se/other-lang/in-english/the-general-data-protection-regulation-gdpr/sensitive-personal-data/">be treated as personal data</a> and therefore a valid PIN can't be used in scenarios such as testing. For this very purpose Skatteverket has issued a list of testdata< with numbers guaranteed not to be given to a person, and they are therefore safe to use. The list below builds upon that orignal list, but enhances it by extracting information such as date of birth, gender and age.
+</p>
+
+<form asp-action="TestDataList" method="get">
+    <div class="form-row">
+        <div class="form-group col-md-6 col-lg-2">
+            <label asp-for="Query.DateOfBirth.From">Date of Birth <small class="text-muted">(from)</small></label>
+            <input type="date" class="form-control" name="dateofbirth.from" value="@Model.Query.DateOfBirth?.From?.ToString("yyyy-MM-dd")" min="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" max="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" title="From @Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="form-group col-md-6 col-lg-2">
+            <label asp-for="Query.DateOfBirth.To">Date of Birth <small class="text-muted">(to)</small></label>
+            <input type="date" class="form-control" name="dateofbirth.to" value="@Model.Query.DateOfBirth?.To?.ToString("yyyy-MM-dd")" min="@Model.Result.TotalDateOfBirthRange.From?.ToString("yyyy-MM-dd")" max="@Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" title="To @Model.Result.TotalDateOfBirthRange.To?.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="form-group col-md-6 col-lg-2">
+            <label asp-for="Query.Age.From">Age <small class="text-muted">(from)</small></label>
+            <input type="number" class="form-control" name="age.from" asp-for="Query.Age.From" min="@Model.Result.TotalAgeRange.From?.ToString("D")" max="@Model.Result.TotalAgeRange.To?.ToString("D")" placeholder="@Model.Result.TotalAgeRange.From?.ToString("D")" />
+        </div>
+        <div class="form-group col-md-6 col-lg-2">
+            <label asp-for="Query.Age.To">Age <small class="text-muted">(to)</small></label>
+            <input type="number" class="form-control" name="age.to" asp-for="Query.Age.To" min="@Model.Result.TotalAgeRange.From?.ToString("D")" max="@Model.Result.TotalAgeRange.To?.ToString("D")" placeholder="@Model.Result.TotalAgeRange.To?.ToString("D")" />
+        </div>
+        <div class="form-group col-md-6 col-lg-2">
+            <label asp-for="Query.Gender">Gender</label>
+            <select class="form-control" name="gender" asp-for="Query.Gender">
+                <option value="" selected>All</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6 col-lg-2 ii-filter-submit-group">
+            <button type="submit" class="btn btn-primary btn-block">Filter</button>
+        </div>
+    </div>
+</form>
+
+
+@if (Model.Result.FilteredNumbersCount > 0)
+{
+    if (Model.Query.Limit.HasValue)
+    {
+        <nav class="d-flex justify-content-between mb-3">
+            <partial name="_TestDataListPaginator" model="@Model" />
+
+            <div class="py-1 d-none d-lg-block">
+                @if (Model.Result.FilteredNumbersCount == Model.Result.TotalNumbers)
+                {
+                    <text>Showing all @Model.Result.TotalNumbers.ToString("N0") results.</text>
+                }
+                else
+                {
+                    <text>Showing @Model.Result.FilteredNumbersCount.ToString("N0") of @Model.Result.TotalNumbers.ToString("N0") results.</text>
+                }
+            </div>
+        </nav>
+    }
+
+    <div class="table-responsive-sm">
+
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark thead-sticky">
+                <tr>
+                    <th scope="col">10 Digit</th>
+                    <th scope="col">12 Digit</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Year</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Month</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Day</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Coordination day</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Delimiter</th>
+                    <th scope="col" class="d-none d-lg-table-cell">BirthNumber</th>
+                    <th scope="col" class="d-none d-lg-table-cell">Checksum</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Date of Birth</th>
+                    <th scope="col">Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var number in Model.Result.FilteredNumbers)
+                {
+                    <tr>
+                        <th scope="row">
+                            <a asp-action="Validate" asp-route-number="@number.To12DigitString()" title="Show more details">@number.To10DigitString()</a>
+                        </th>
+                        <td>@number.To12DigitString()</td>
+                        <td class="d-none d-lg-table-cell">@number.Year</td>
+                        <td class="d-none d-lg-table-cell">@number.Month</td>
+                        <td class="d-none d-lg-table-cell">@number.RealDay</td>
+                        <td class="d-none d-lg-table-cell">@number.CoordinationDay</td>
+                        <td class="d-none d-lg-table-cell">@number.GetDelimiter()</td>
+                        <td class="d-none d-lg-table-cell">@number.BirthNumber</td>
+                        <td class="d-none d-lg-table-cell">@number.Checksum</td>
+                        <td>
+                            <i class="fal fa-@(number.GetGenderHint() == Gender.Female ? "venus" : "mars")" title="@number.GetGenderHint()"></i>
+                            @number.GetGenderHint()
+                        </td>
+                        <td>@number.GetDateOfBirthHint().ToString("yyyy-MM-dd")</td>
+                        <td>@(number.GetAgeHint().ToString("D"))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        No results matched the current filter.
+    </div>
+}

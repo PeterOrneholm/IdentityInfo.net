@@ -1,0 +1,133 @@
+@using ActiveLogin.Identity.Swedish.Extensions
+@model ActiveLogin.Identity.Swedish.SwedishCoordinationNumber;
+
+@{
+    var showDescription = (bool)(ViewData["show-description"] ?? false);
+}
+
+<section class="card bg-white mt-3">
+    <h4 class="card-header text-center"><i class="fal fa-id-badge"></i> @Model.To10DigitString()</h4>
+    <div class="card-body px-0 py-0">
+        <table class="table table-hover table-striped ii-spin-info-table my-0">
+            <tr>
+                <th>10 Digit String</th>
+                <td>@Model.To10DigitString()</td>
+                <td>
+                    <a href="#" onclick="identityinfonet.copyToClipboard('@Model.To10DigitString()');return false;" title="Copy '@Model.To10DigitString()' to clipboard"><i class="fal fa-clipboard"></i></a>
+                </td>
+                @if (showDescription)
+                {
+                    <td>This is the most common format, often refered to as YYMMDD-XXXX. The year is represented as 2 digits and the delimiter provides the info required to get the full year.</td>
+                }
+            </tr>
+            <tr>
+                <th>12 Digit String</th>
+                <td>@Model.To12DigitString()</td>
+                <td>
+                    <a href="#" onclick="identityinfonet.copyToClipboard('@Model.To12DigitString()');return false;" title="Copy '@Model.To12DigitString()' to clipboard"><i class="fal fa-clipboard"></i></a>
+                </td>
+                @if (showDescription)
+                {
+                    <td>The format that is the receomended one to use when persisting it as it contains the full year as digits and no delmiter that changes over time..</td>
+                }
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>@Model.Year.ToString("0000")</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>The year the person was born.</td>
+                }
+            </tr>
+            <tr>
+                <th>Month</th>
+                <td>@Model.Month.ToString("00")</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>The month the person was born.</td>
+                }
+            </tr>
+            <tr>
+                <th>Day</th>
+                <td>@Model.RealDay.ToString("00")</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>
+                        The day the person was born.<br />
+                        <em>Note:</em> Because of a limited amount of birth numbers per day (1000) a person might not receive the exact day as the day part.
+                        It can be a few days later or earlier, but always within the same month.
+                    </td>
+                }
+            </tr>
+            <tr>
+                <th>Coordination day</th>
+                <td>@Model.CoordinationDay.ToString("00")</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>
+                        The day part of the number.<br />
+                        Is the Day + 60.
+                    </td>
+                }
+            </tr>
+            <tr>
+                <th>Delimiter</th>
+                <td>@Model.GetDelimiter()</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>By default a hyphen (-) but turns into a plus (+) the year the person turns 100.</td>
+                }
+            </tr>
+            <tr>
+                <th>Birth Number</th>
+                <td>@Model.BirthNumber.ToString("000")</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>A number to uniqely identity a person born on the day. 1000 in total, 500 female (even numbers) and 500 male (odd numbers).</td>
+                }
+            </tr>
+            <tr>
+                <th>Checksum</th>
+                <td>@Model.Checksum</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>Calculated using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> on the 10 digit string (without delimiter).</td>
+                }
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>@Model.GetGenderHint()</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>Extracted from Birth Number.</td>
+                }
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td>@Model.GetDateOfBirthHint().ToString("yyyy-MM-dd")</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>Extracted from Year, Month and Day. See potential limitation on Day.</td>
+                }
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>@(Model.GetAgeHint().ToString("D"))</td>
+                <td></td>
+                @if (showDescription)
+                {
+                    <td>Extracted from Date of Birth. See potential limitation on Day.</td>
+                }
+            </tr>
+        </table>
+    </div>
+</section>

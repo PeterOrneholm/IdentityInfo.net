@@ -4,8 +4,8 @@ using ActiveLogin.Identity.Swedish;
 
 namespace IdentityInfo.Core.Swedish.Testdata
 {
-    public interface ISwedishPersonalIdentityNumbersTestdataProvider
+    public interface ISwedishCoordinationNumbersTestdataProvider
     {
-        Task<List<SwedishPersonalIdentityNumber>> GetSwedishPersonalIdentityNumbersAsync();
+        Task<List<SwedishCoordinationNumber>> GetSwedishCoordinationNumbersAsync();
     }
 }
