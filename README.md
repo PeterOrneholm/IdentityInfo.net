@@ -5,17 +5,3 @@
 [![Twitter Follow](https://img.shields.io/badge/Twitter-@PeterOrneholm-blue.svg?logo=twitter)](https://twitter.com/PeterOrneholm)
 
 Source for the site https://swedish.identityinfo.net/
-
-## Todo
-
-### General
-- [ ] Add info on startpage
-
-### Swedish Personal Identity Info
-- [ ] Add info about Swedish Personal Identity Info
-- [ ] Add generator / randomizer
-
-### Swedish Coordination Number
-- [ ] Add testdata list
-- [ ] Add validator
-- [ ] Add generator
