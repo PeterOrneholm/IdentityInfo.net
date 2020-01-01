@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
 namespace IdentityInfo.Web
@@ -16,7 +16,6 @@ namespace IdentityInfo.Web
                 {
                     webBuilder
                         .ConfigureKestrel(options => { options.AddServerHeader = false; })
-                        .UseApplicationInsights()
                         .UseStartup<Startup>();
                 });
     }

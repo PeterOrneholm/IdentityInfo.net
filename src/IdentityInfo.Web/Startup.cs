@@ -23,6 +23,8 @@ namespace IdentityInfo.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationInsightsTelemetry();
+
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
 
