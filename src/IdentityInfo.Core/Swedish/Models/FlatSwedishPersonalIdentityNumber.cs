@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ActiveLogin.Identity.Swedish;
 using ActiveLogin.Identity.Swedish.Extensions;
 
@@ -19,11 +19,21 @@ namespace IdentityInfo.Core.Swedish.Testdata
         public FlatSwedishPersonalIdentityNumber(SwedishPersonalIdentityNumber pin)
         {
             TwelveDigitString = pin.To12DigitString();
-            TenDigitString = pin.To10DigitString();
+
+            try
+            {
+                TenDigitString = pin.To10DigitString();
+                Delimiter = TenDigitString[6].ToString();
+            }
+            catch
+            {
+                TenDigitString = "";
+                Delimiter = "";
+            }
+
             Year = pin.Year;
             Month = pin.Month;
             Day = pin.Day;
-            Delimiter = TenDigitString[6];
             BirthNumber = pin.BirthNumber;
             Checksum = pin.Checksum;
             GenderHint = pin.GetGenderHint();
@@ -36,7 +46,7 @@ namespace IdentityInfo.Core.Swedish.Testdata
         public int Year { get; }
         public int Month { get; }
         public int Day { get; }
-        public char Delimiter { get; }
+        public string Delimiter { get; }
         public int BirthNumber { get; }
         public int Checksum { get; }
         public DateTime DateOfBirthHint { get; }
