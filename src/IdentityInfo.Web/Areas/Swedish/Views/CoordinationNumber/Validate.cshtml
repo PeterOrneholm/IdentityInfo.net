@@ -54,8 +54,11 @@
     }
     else
     {
-        <div class="alert alert-danger text-center" role="alert">
-            <i class="fal fa-exclamation-square"></i> <strong>@Model.NumberInput</strong> is not recognized as a valid Swedish Coordination Number!
-        </div>
+<div class="alert alert-danger text-center" role="alert">
+    <i class="fal fa-exclamation-square"></i> <strong>@Model.NumberInput</strong> is not recognized as a valid Swedish Coordination Number!
+    <p>
+        Details: @Model.InvalidReason
+    </p>
+</div>
     }
 }

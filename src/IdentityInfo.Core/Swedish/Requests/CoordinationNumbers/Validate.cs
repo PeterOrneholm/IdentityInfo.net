@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ActiveLogin.Identity.Swedish;
@@ -26,39 +27,45 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
             {
                 var number = request.Number ?? string.Empty;
 
-                if (SwedishCoordinationNumber.TryParse(number, out var result))
+                try
                 {
+                    var result = SwedishCoordinationNumber.Parse(number);
                     var numbers = await _coordinationNumbersTestdataProvider.GetSwedishCoordinationNumbersAsync();
                     var isTestdataNumber = numbers.Contains(result);
+
                     return Result.Valid(number, isTestdataNumber, result);
                 }
-
-                return Result.Invalid(number);
+                catch (Exception e)
+                {
+                    return Result.Invalid(number, e.Message);
+                }
             }
         }
 
         public class Result
         {
-            private Result(string numberInput, bool isValid, bool isTestdataNumber, SwedishCoordinationNumber? number)
+            private Result(string numberInput, bool isValid, string invalidReason, bool isTestdataNumber, SwedishCoordinationNumber? number)
             {
                 NumberInput = numberInput;
                 IsValid = isValid;
+                InvalidReason = invalidReason;
                 IsTestdataNumber = isTestdataNumber;
                 Number = number;
             }
 
             public static Result Valid(string input, bool isTestdataNumber, SwedishCoordinationNumber number)
             {
-                return new Result(input, true, isTestdataNumber, number);
+                return new Result(input, true, string.Empty, isTestdataNumber, number);
             }
 
-            public static Result Invalid(string input)
+            public static Result Invalid(string input, string invalidReason)
             {
-                return new Result(input, false, false, null);
+                return new Result(input, false, invalidReason, false, null);
             }
 
             public string NumberInput { get; }
             public bool IsValid { get; }
+            public string InvalidReason { get; }
             public bool IsTestdataNumber { get; }
             public SwedishCoordinationNumber? Number { get; }
         }

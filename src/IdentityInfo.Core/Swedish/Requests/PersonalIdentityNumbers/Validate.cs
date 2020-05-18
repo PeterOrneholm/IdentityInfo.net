@@ -1,4 +1,5 @@
-﻿using System.Threading;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using ActiveLogin.Identity.Swedish;
 using IdentityInfo.Core.Swedish.Testdata;
@@ -26,39 +27,45 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
             {
                 var number = request.Number ?? string.Empty;
 
-                if (SwedishPersonalIdentityNumber.TryParse(number, out var result))
+                try
                 {
+                    var result = SwedishPersonalIdentityNumber.Parse(number);
                     var flatSwedishPersonalIdentityNumber = new FlatSwedishPersonalIdentityNumber(result);
                     var isTestdataNumber = await _flatSwedishPersonalIdentityNumbersTestdataProvider.Contains(flatSwedishPersonalIdentityNumber);
+
                     return Result.Valid(number, isTestdataNumber, flatSwedishPersonalIdentityNumber);
                 }
-
-                return Result.Invalid(number);
+                catch (Exception e)
+                {
+                    return Result.Invalid(number, e.Message);
+                }
             }
         }
 
         public class Result
         {
-            private Result(string numberInput, bool isValid, bool isTestdataNumber, FlatSwedishPersonalIdentityNumber? number)
+            private Result(string numberInput, bool isValid, string invalidReason, bool isTestdataNumber, FlatSwedishPersonalIdentityNumber? number)
             {
                 NumberInput = numberInput;
                 IsValid = isValid;
+                InvalidReason = invalidReason;
                 IsTestdataNumber = isTestdataNumber;
                 Number = number;
             }
 
             public static Result Valid(string input, bool isTestdataNumber, FlatSwedishPersonalIdentityNumber number)
             {
-                return new Result(input, true, isTestdataNumber, number);
+                return new Result(input, true, string.Empty, isTestdataNumber, number);
             }
 
-            public static Result Invalid(string input)
+            public static Result Invalid(string input, string invalidReason)
             {
-                return new Result(input, false, false, null);
+                return new Result(input, false, invalidReason, false, null);
             }
 
             public string NumberInput { get; }
             public bool IsValid { get; }
+            public string InvalidReason { get; }
             public bool IsTestdataNumber { get; }
             public FlatSwedishPersonalIdentityNumber? Number { get; }
         }
