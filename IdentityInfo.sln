@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityInfo.Web", "src\IdentityInfo.Web\IdentityInfo.Web.csproj", "{20279ACE-6181-436D-BA70-F25CFEBE63FA}"
 EndProject
@@ -31,6 +31,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6CA03175-E1DA-4642-A7E3-5CD3861921AE}"
 	ProjectSection(SolutionItems) = preProject
 		.github\pull_request_template.md = .github\pull_request_template.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A2908206-9FED-4813-B8D1-A8CD13FFD4AB}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\identityinfo-web-prod.yml = .github\workflows\identityinfo-web-prod.yml
 	EndProjectSection
 EndProject
 Global
@@ -65,6 +70,7 @@ Global
 		{7931BDF4-2F15-463F-BAC2-EE7EF631454E} = {42B322B2-C3F1-440A-AC32-082F9ACE2B57}
 		{07C85007-298D-4827-8132-E15ECA9BED43} = {B1436B41-1C01-443D-A050-B08F01F3718E}
 		{6CA03175-E1DA-4642-A7E3-5CD3861921AE} = {267DE2A1-3203-45EA-931B-B8C8513DE0B3}
+		{A2908206-9FED-4813-B8D1-A8CD13FFD4AB} = {6CA03175-E1DA-4642-A7E3-5CD3861921AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5BF55CBA-D04F-4551-A129-F0D4FA721E32}
