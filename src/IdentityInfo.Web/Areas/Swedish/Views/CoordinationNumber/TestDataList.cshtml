@@ -98,16 +98,14 @@
                         <td class="d-none d-lg-table-cell">@number.Year</td>
                         <td class="d-none d-lg-table-cell">@number.Month</td>
                         <td class="d-none d-lg-table-cell">@number.RealDay</td>
-                        <td class="d-none d-lg-table-cell">@number.CoordinationDay</td>
+                        <td class="d-none d-lg-table-cell">@number.Day</td>
                         <td class="d-none d-lg-table-cell">@number.GetDelimiter()</td>
-                        <td class="d-none d-lg-table-cell">@number.BirthNumber</td>
-                        <td class="d-none d-lg-table-cell">@number.Checksum</td>
                         <td>
                             <i class="fal fa-@(number.GetGenderHint() == Gender.Female ? "venus" : "mars")" title="@number.GetGenderHint()"></i>
                             @number.GetGenderHint()
                         </td>
-                        <td>@number.GetDateOfBirthHint().ToString("yyyy-MM-dd")</td>
-                        <td>@(number.GetAgeHint().ToString("D"))</td>
+                        <td>@number.GetDateOfBirthHint()?.ToString("yyyy-MM-dd")</td>
+                        <td>@(number.GetAgeHint()?.ToString("D"))</td>
                     </tr>
                 }
             </tbody>

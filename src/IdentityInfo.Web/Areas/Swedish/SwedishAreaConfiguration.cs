@@ -17,7 +17,10 @@ namespace IdentityInfo.Web.Areas.Swedish
 
             services.AddSingleton<ISwedishCoordinationNumbersTestdataProvider, SwedishCoordinationNumbersTestdataProvider>();
 
-            services.AddMediatR(typeof(GetTestdataList));
+            services.AddMediatR(config =>
+            {
+                config.RegisterServicesFromAssembly(typeof(GetTestdataList).Assembly);
+            });
         }
     }
 }

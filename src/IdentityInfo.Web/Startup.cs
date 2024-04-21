@@ -2,6 +2,7 @@ using IdentityInfo.Web.Areas.Swedish;
 using IdentityInfo.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
@@ -37,9 +38,9 @@ namespace IdentityInfo.Web
         {
             app.Use(async (context, next) =>
             {
-                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-                context.Response.Headers.Add("X-Frame-Options", "deny");
-                context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+                context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+                context.Response.Headers.Append("X-Frame-Options", "deny");
+                context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
                 await next.Invoke();
             });
 

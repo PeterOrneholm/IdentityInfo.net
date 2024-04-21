@@ -7,7 +7,6 @@ env:
   AZURE_WEBAPP_NAME: identityinfo-web-prod
   AZURE_WEBAPP_PACKAGE_PATH: src\IdentityInfo.Web\published
   CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 5.0.x
   WORKING_DIRECTORY: src\IdentityInfo.Web
 jobs:
   build:
@@ -18,7 +17,6 @@ jobs:
       uses: actions/setup-dotnet@v1.8.0
       with:
         include-prerelease: True
-        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
     - name: Restore
       run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
     - name: Build

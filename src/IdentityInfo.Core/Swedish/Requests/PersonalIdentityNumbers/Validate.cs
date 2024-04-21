@@ -29,7 +29,7 @@ namespace IdentityInfo.Core.Swedish.Requests.PersonalIdentityNumbers
 
                 try
                 {
-                    var result = SwedishPersonalIdentityNumber.Parse(number);
+                    var result = PersonalIdentityNumber.Parse(number);
                     var flatSwedishPersonalIdentityNumber = new FlatSwedishPersonalIdentityNumber(result);
                     var isTestdataNumber = await _flatSwedishPersonalIdentityNumbersTestdataProvider.Contains(flatSwedishPersonalIdentityNumber);
 

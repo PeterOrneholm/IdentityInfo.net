@@ -149,7 +149,7 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
                 return apiResult;
             }
 
-            private static IEnumerable<SwedishCoordinationNumber> ApplyFilters(QueryBase request, IEnumerable<SwedishCoordinationNumber> filteredTestdata)
+            private static IEnumerable<CoordinationNumber> ApplyFilters(QueryBase request, IEnumerable<CoordinationNumber> filteredTestdata)
             {
                 var filteredItems = filteredTestdata;
 
@@ -176,24 +176,24 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
                 return filteredItems;
             }
 
-            private static IEnumerable<SwedishCoordinationNumber> FilterRange<T>(IEnumerable<SwedishCoordinationNumber> items, Range<T>? range, Func<SwedishCoordinationNumber, T> valueGetter) where T : struct, IComparable<T>
+            private static IEnumerable<CoordinationNumber> FilterRange<T>(IEnumerable<CoordinationNumber> items, Range<T>? range, Func<CoordinationNumber, T?> valueGetter) where T : struct, IComparable<T>
             {
                 var filteredItems = items;
 
                 if (range?.From != null)
                 {
-                    filteredItems = filteredItems.Where(x => valueGetter(x).CompareTo(range.From.Value) >= 0);
+                    filteredItems = filteredItems.Where(x => valueGetter(x)?.CompareTo(range.From.Value) >= 0);
                 }
 
                 if (range?.To != null)
                 {
-                    filteredItems = filteredItems.Where(x => valueGetter(x).CompareTo(range.To.Value) <= 0);
+                    filteredItems = filteredItems.Where(x => valueGetter(x)?.CompareTo(range.To.Value) <= 0);
                 }
 
                 return filteredItems;
             }
 
-            private IEnumerable<SwedishCoordinationNumber> Paginate(QueryBase request, IEnumerable<SwedishCoordinationNumber> filteredTestdata)
+            private IEnumerable<CoordinationNumber> Paginate(QueryBase request, IEnumerable<CoordinationNumber> filteredTestdata)
             {
                 if (request.Offset.HasValue)
                 {
@@ -211,7 +211,7 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
 
         public class Result
         {
-            public Result(IEnumerable<SwedishCoordinationNumber> filteredNumbers, int filteredNumbersCount, int totalNumbers, Range<int> totalAgeRange, Range<DateTime> totalDateOfBirthRange)
+            public Result(IEnumerable<CoordinationNumber> filteredNumbers, int filteredNumbersCount, int totalNumbers, Range<int> totalAgeRange, Range<DateTime> totalDateOfBirthRange)
             {
                 FilteredNumbers = filteredNumbers;
                 FilteredNumbersCount = filteredNumbersCount;
@@ -220,7 +220,7 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
                 TotalDateOfBirthRange = totalDateOfBirthRange;
             }
 
-            public IEnumerable<SwedishCoordinationNumber> FilteredNumbers { get; }
+            public IEnumerable<CoordinationNumber> FilteredNumbers { get; }
             public int FilteredNumbersCount { get; }
             public int TotalNumbers { get; }
             public Range<int> TotalAgeRange { get; }
@@ -229,7 +229,7 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
 
         public class ApiResult
         {
-            public ApiResult(int resultCount, int? offset, int? limit, IEnumerable<SwedishCoordinationNumber> results)
+            public ApiResult(int resultCount, int? offset, int? limit, IEnumerable<CoordinationNumber> results)
             {
                 ResultCount = resultCount;
                 Offset = offset;
@@ -240,7 +240,7 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
             public int ResultCount { get; }
             public int? Offset { get; }
             public int? Limit { get; }
-            public IEnumerable<SwedishCoordinationNumber> Results { get; }
+            public IEnumerable<CoordinationNumber> Results { get; }
         }
 
         public class Range<T> where T : struct

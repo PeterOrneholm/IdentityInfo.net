@@ -6,6 +6,6 @@ namespace IdentityInfo.Core.Swedish.Testdata
 {
     public interface ISwedishCoordinationNumbersTestdataProvider
     {
-        Task<List<SwedishCoordinationNumber>> GetSwedishCoordinationNumbersAsync();
+        Task<List<CoordinationNumber>> GetSwedishCoordinationNumbersAsync();
     }
 }

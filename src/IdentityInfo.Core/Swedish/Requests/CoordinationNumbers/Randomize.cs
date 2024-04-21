@@ -41,12 +41,12 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
 
         public class Result
         {
-            public Result(List<SwedishCoordinationNumber> numbers)
+            public Result(List<CoordinationNumber> numbers)
             {
                 Numbers = numbers;
             }
 
-            public List<SwedishCoordinationNumber> Numbers { get; }
+            public List<CoordinationNumber> Numbers { get; }
             public int Count => Numbers.Count;
         }
     }

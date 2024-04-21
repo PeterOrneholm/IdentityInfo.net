@@ -6,7 +6,7 @@ namespace IdentityInfo.Core.Swedish.Testdata
 {
     public struct FlatSwedishPersonalIdentityNumber : IEquatable<FlatSwedishPersonalIdentityNumber>
     {
-        private static int? TryGetAgeHint(SwedishPersonalIdentityNumber pin, DateTime dateOfBirthHint)
+        private static int? TryGetAgeHint(PersonalIdentityNumber pin, DateTime dateOfBirthHint)
         {
             if (dateOfBirthHint > DateTime.UtcNow.Date)
             {
@@ -16,7 +16,7 @@ namespace IdentityInfo.Core.Swedish.Testdata
             return pin.GetAgeHint();
         }
 
-        public FlatSwedishPersonalIdentityNumber(SwedishPersonalIdentityNumber pin)
+        public FlatSwedishPersonalIdentityNumber(PersonalIdentityNumber pin)
         {
             TwelveDigitString = pin.To12DigitString();
 

@@ -8,9 +8,9 @@ namespace IdentityInfo.Core.Swedish.Testdata
 {
     public class SwedishPersonalIdentityNumbersTestdataProvider : ISwedishPersonalIdentityNumbersTestdataProvider
     {
-        private readonly List<SwedishPersonalIdentityNumber> _allNumbers = SwedishPersonalIdentityNumberTestData.AllPinsByDateDesc().ToList();
+        private readonly List<PersonalIdentityNumber> _allNumbers = PersonalIdentityNumberTestData.AllPinsByDateDesc().ToList();
 
-        public Task<List<SwedishPersonalIdentityNumber>> GetSwedishPersonalIdentityNumbersAsync()
+        public Task<List<PersonalIdentityNumber>> GetSwedishPersonalIdentityNumbersAsync()
         {
             return Task.FromResult(_allNumbers);
         }

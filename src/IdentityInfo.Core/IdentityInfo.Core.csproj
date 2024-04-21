@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -20,9 +20,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ActiveLogin.Identity.Swedish" Version="3.0.0-ci-201912172" />
-        <PackageReference Include="ActiveLogin.Identity.Swedish.TestData" Version="3.0.0-ci-201912172" />
-        <PackageReference Include="MediatR" Version="7.0.0" />
+        <PackageReference Include="ActiveLogin.Identity.Swedish" Version="3.0.0" />
+        <PackageReference Include="ActiveLogin.Identity.Swedish.TestData" Version="3.1.0" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
     </ItemGroup>
 
 </Project>

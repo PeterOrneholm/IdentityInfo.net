@@ -1,5 +1,5 @@
 @using ActiveLogin.Identity.Swedish.Extensions
-@model ActiveLogin.Identity.Swedish.SwedishCoordinationNumber;
+@model ActiveLogin.Identity.Swedish.CoordinationNumber;
 
 @{
     var showDescription = (bool)(ViewData["show-description"] ?? false);
@@ -64,7 +64,7 @@
             </tr>
             <tr>
                 <th>Coordination day</th>
-                <td>@Model.CoordinationDay.ToString("00")</td>
+                <td>@Model.Day.ToString("00")</td>
                 <td></td>
                 @if (showDescription)
                 {
@@ -84,24 +84,6 @@
                 }
             </tr>
             <tr>
-                <th>Birth Number</th>
-                <td>@Model.BirthNumber.ToString("000")</td>
-                <td></td>
-                @if (showDescription)
-                {
-                    <td>A number to uniqely identity a person born on the day. 1000 in total, 500 female (even numbers) and 500 male (odd numbers).</td>
-                }
-            </tr>
-            <tr>
-                <th>Checksum</th>
-                <td>@Model.Checksum</td>
-                <td></td>
-                @if (showDescription)
-                {
-                    <td>Calculated using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm</a> on the 10 digit string (without delimiter).</td>
-                }
-            </tr>
-            <tr>
                 <th>Gender</th>
                 <td>@Model.GetGenderHint()</td>
                 <td></td>
@@ -112,7 +94,7 @@
             </tr>
             <tr>
                 <th>Date of Birth</th>
-                <td>@Model.GetDateOfBirthHint().ToString("yyyy-MM-dd")</td>
+                <td>@Model.GetDateOfBirthHint()?.ToString("yyyy-MM-dd")</td>
                 <td></td>
                 @if (showDescription)
                 {
@@ -121,7 +103,7 @@
             </tr>
             <tr>
                 <th>Age</th>
-                <td>@(Model.GetAgeHint().ToString("D"))</td>
+                <td>@(Model.GetAgeHint()?.ToString("D"))</td>
                 <td></td>
                 @if (showDescription)
                 {

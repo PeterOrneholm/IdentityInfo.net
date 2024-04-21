@@ -6,6 +6,6 @@ namespace IdentityInfo.Core.Swedish.Testdata
 {
     public interface ISwedishPersonalIdentityNumbersTestdataProvider
     {
-        Task<List<SwedishPersonalIdentityNumber>> GetSwedishPersonalIdentityNumbersAsync();
+        Task<List<PersonalIdentityNumber>> GetSwedishPersonalIdentityNumbersAsync();
     }
 }

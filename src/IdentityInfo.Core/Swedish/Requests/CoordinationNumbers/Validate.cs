@@ -29,7 +29,7 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
 
                 try
                 {
-                    var result = SwedishCoordinationNumber.Parse(number);
+                    var result = CoordinationNumber.Parse(number);
                     var numbers = await _coordinationNumbersTestdataProvider.GetSwedishCoordinationNumbersAsync();
                     var isTestdataNumber = numbers.Contains(result);
 
@@ -44,7 +44,7 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
 
         public class Result
         {
-            private Result(string numberInput, bool isValid, string invalidReason, bool isTestdataNumber, SwedishCoordinationNumber? number)
+            private Result(string numberInput, bool isValid, string invalidReason, bool isTestdataNumber, CoordinationNumber? number)
             {
                 NumberInput = numberInput;
                 IsValid = isValid;
@@ -53,7 +53,7 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
                 Number = number;
             }
 
-            public static Result Valid(string input, bool isTestdataNumber, SwedishCoordinationNumber number)
+            public static Result Valid(string input, bool isTestdataNumber, CoordinationNumber number)
             {
                 return new Result(input, true, string.Empty, isTestdataNumber, number);
             }
@@ -67,7 +67,7 @@ namespace IdentityInfo.Core.Swedish.Requests.CoordinationNumbers
             public bool IsValid { get; }
             public string InvalidReason { get; }
             public bool IsTestdataNumber { get; }
-            public SwedishCoordinationNumber? Number { get; }
+            public CoordinationNumber? Number { get; }
         }
     }
 }

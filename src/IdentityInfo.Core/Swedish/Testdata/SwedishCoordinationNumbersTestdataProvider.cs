@@ -8,9 +8,9 @@ namespace IdentityInfo.Core.Swedish.Testdata
 {
     public class SwedishCoordinationNumbersTestdataProvider : ISwedishCoordinationNumbersTestdataProvider
     {
-        private readonly List<SwedishCoordinationNumber> _allNumbers = SwedishCoordinationNumberTestData.AllCoordinationNumbersByDateDesc().ToList();
+        private readonly List<CoordinationNumber> _allNumbers = CoordinationNumberTestData.AllCoordinationNumbersByDateDesc().ToList();
 
-        public Task<List<SwedishCoordinationNumber>> GetSwedishCoordinationNumbersAsync()
+        public Task<List<CoordinationNumber>> GetSwedishCoordinationNumbersAsync()
         {
             return Task.FromResult(_allNumbers);
         }
