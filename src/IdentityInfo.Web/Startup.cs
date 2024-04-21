@@ -52,9 +52,9 @@ namespace IdentityInfo.Web
             {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
-            app.UseHttpsRedirection();
 
             var provider = new FileExtensionContentTypeProvider
             {
